@@ -5,7 +5,10 @@ import ElContainer, {
   ElHeader,
   ElFooter,
   ElSubMenu,
-  ElPopper
+  ElPopper,
+  ElRow,
+  ElCol,
+  ElButton
 } from 'element-plus'
 import { App } from 'vue'
 const installElements = (app: App): void => {
@@ -18,5 +21,8 @@ const installElements = (app: App): void => {
     .use(ElFooter)
     .use(ElSubMenu)
     .use(ElPopper)
+    .use(ElRow)
+    .use(ElCol)
+    .use(ElButton)
 }
 export default installElements

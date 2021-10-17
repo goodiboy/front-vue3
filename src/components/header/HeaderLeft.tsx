@@ -1,8 +1,9 @@
 import { defineComponent, ref } from 'vue'
+import styles from '@/components/header/pageHeader.module.scss'
 import { ChatDotRound, Expand, Help } from '@element-plus/icons'
-import styles from './pageHeader.module.scss'
+
 export default defineComponent({
-  name: 'PageHeader',
+  name: 'HeaderLeft',
   setup() {
     const activeIndex = ref('1')
 
@@ -16,7 +17,7 @@ export default defineComponent({
       >
         <el-menu-item index="1">
           <div class="flex flex-align-center">
-            <el-icon size="20" class={styles.menuIcon}>
+            <el-icon size={20} class={styles.menuIcon}>
               <ChatDotRound />
             </el-icon>
             交流
@@ -24,7 +25,7 @@ export default defineComponent({
         </el-menu-item>
         <el-menu-item index="2">
           <div class="flex flex-align-center">
-            <el-icon size="20" class={styles.menuIcon}>
+            <el-icon size={20} class={styles.menuIcon}>
               <Expand />
             </el-icon>
             案例
@@ -32,7 +33,7 @@ export default defineComponent({
         </el-menu-item>
         <el-menu-item index="3">
           <div class="flex flex-align-center">
-            <el-icon sizi="20" class={styles.menuIcon}>
+            <el-icon size={20} class={styles.menuIcon}>
               <Help />
             </el-icon>
             框架
