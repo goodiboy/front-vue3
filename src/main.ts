@@ -5,9 +5,9 @@ import './assets/global.scss'
 // import ElementPlus from 'element-plus'
 // import 'element-plus/dist/index.css'
 
-import registerPlus from '@/lib'
+import lib from '@/lib'
 
 const app = createApp(App)
 // app.use(ElementPlus)
-registerPlus(app)
+app.use(lib)
 app.mount('#app')
