@@ -33,7 +33,7 @@ export default defineComponent({
     }
 
     return () => {
-      return <div class={styles.rightWrap}>{renderHtml}</div>
+      return <div class={styles.headerRight}>{renderHtml}</div>
     }
   }
 })

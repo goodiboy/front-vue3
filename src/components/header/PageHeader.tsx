@@ -7,7 +7,7 @@ export default defineComponent({
   setup() {
     return () => {
       return (
-        <el-row gutter={20} class={styles.headerBg}>
+        <el-row gutter={20} class={styles.header}>
           <el-col span={20}>
             <HeaderLeft />
           </el-col>
