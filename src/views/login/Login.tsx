@@ -1,5 +1,6 @@
 import { defineComponent, reactive } from 'vue'
 import './login.scss'
+import Captcha from '@/components/public/captcha/Captcha'
 export default defineComponent({
   name: 'Login',
   setup() {
@@ -28,7 +29,7 @@ export default defineComponent({
                   autocomplete="off"
                   style="width:120px"
                 />
-                <span>1</span>
+                <Captcha />
               </div>
             </el-form-item>
             <el-form-item>

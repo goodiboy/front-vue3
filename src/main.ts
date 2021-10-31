@@ -6,7 +6,7 @@ import './assets/global.scss'
 // import ElementPlus from 'element-plus'
 // import 'element-plus/dist/index.css'
 
-import lib from '@/lib'
+import lib from '@/plugin'
 
 const app = createApp(App)
 // app.use(ElementPlus)
