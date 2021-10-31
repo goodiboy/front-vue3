@@ -1,0 +1,30 @@
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background: url("@/assets/login_bg.jpg");
+
+  .login-container {
+    width: 400px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+
+    h1 {
+      margin: 20px;
+      font-size: 30px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .form-box {
+      padding: 0 50px 0 20px;
+
+      .el-form-item__label {
+        color: #fff;
+      }
+    }
+  }
+}
