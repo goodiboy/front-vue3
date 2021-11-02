@@ -7,7 +7,15 @@ const routes: RouteRecordRaw[] = [
     meta: {
       disableHeader: true
     },
-    component: () => import('@/views/login/Login')
+    component: () => import('@/views/login-register/login/Login')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    meta: {
+      disableHeader: true
+    },
+    component: () => import('@/views/login-register/register/Register')
   }
 ]
 

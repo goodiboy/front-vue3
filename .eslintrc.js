@@ -21,7 +21,11 @@ module.exports = {
         vars: 'all',
         args: 'none'
       }
-    ]
+    ],
+    // 关闭函数必须要有返回类型，直接使用ts自带的类型推导
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    // 允许使用any，但尽量不要使用
+    '@typescript-eslint/no-explicit-any': 'off'
   },
   parserOptions: {
     parser: '@typescript-eslint/parser',
