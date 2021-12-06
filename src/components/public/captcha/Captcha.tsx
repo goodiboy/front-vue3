@@ -11,7 +11,7 @@ export default defineComponent({
 
     const getCaptcha = async () => {
       const res = await PublicController.getCaptcha()
-      captchaImg.value = res.data.data
+      captchaImg.value = res.data
     }
 
     return () => (
