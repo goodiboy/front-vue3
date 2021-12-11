@@ -1,6 +1,6 @@
 import { defineComponent, onBeforeMount, ref } from 'vue'
 import { getCaptcha } from '@/api/common'
-
+import style from './captcha.module.scss'
 export default defineComponent({
   name: 'Captcha',
   setup(props, { expose }) {
@@ -23,7 +23,7 @@ export default defineComponent({
 
     return () => (
       <span
-        class="flex"
+        class={[style.captcha, 'flex']}
         style="cursor:pointer"
         v-html={captchaImg.value}
         onClick={getCaptchaData}
