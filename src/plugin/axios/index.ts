@@ -21,17 +21,18 @@ AxiosInstance.interceptors.request.use(
 
 AxiosInstance.interceptors.response.use(
   (response) => {
-    if (response.status === 200) {
-      return Promise.resolve(response.data)
+    console.log(response)
+    if (response.data.code === 200) {
+      return Promise.resolve(response.data.data)
     } else {
       if (!response.config.custom?.disableMsg) {
-        ElMessage.error('服务繁忙～')
+        ElMessage.error(response.data.msg)
       }
       return Promise.reject(response)
     }
   },
   (error) => {
-    console.log(error)
+    ElMessage.error('服务繁忙!')
     return Promise.reject(error)
   }
 )

@@ -1,21 +1,33 @@
 import { defineComponent, onBeforeMount, ref } from 'vue'
-import PublicController from '@/api/PublicController'
+import { getCaptcha } from '@/api/common'
 
 export default defineComponent({
   name: 'Captcha',
-  setup() {
+  setup(props, { expose }) {
     const captchaImg = ref<JSX.Element>()
+    const captchaId = ref('')
+
     onBeforeMount(async () => {
-      await getCaptcha()
+      await getCaptchaData()
     })
 
-    const getCaptcha = async () => {
-      const res = await PublicController.getCaptcha()
+    const getCaptchaData = async () => {
+      const res = await getCaptcha()
       captchaImg.value = res.data
+      captchaId.value = res.id
     }
 
+    expose({
+      captchaId
+    })
+
     return () => (
-      <span class="flex" style="cursor:pointer" v-html={captchaImg.value} onClick={getCaptcha} />
+      <span
+        class="flex"
+        style="cursor:pointer"
+        v-html={captchaImg.value}
+        onClick={getCaptchaData}
+      />
     )
   }
 })

@@ -1,15 +1,20 @@
 import { reactive, ref } from 'vue'
-import { ElForm } from 'element-plus'
+import { ElForm, ElMessage } from 'element-plus'
 import { RuleItem } from 'async-validator'
+import { LoginForm } from '@/types/login'
 
 const useFormRules = () => {
   const refForm = ref<InstanceType<typeof ElForm>>()
-  const formData = reactive({
+  const formData = reactive<LoginForm>({
     username: '',
     password: '',
     password2: '',
-    captcha: ''
+    captcha: '',
+    captchaId: '',
+    nickname: ''
   })
+
+  // 验证密码是否一致
   const validatePass = (rule: RuleItem, value: any, callback: any) => {
     if (!refForm.value) return
     if (value === '') {
@@ -21,6 +26,8 @@ const useFormRules = () => {
       callback()
     }
   }
+
+  // 验证密码是否一致
   const validatePass2 = (rule: RuleItem, value: any, callback: any) => {
     if (value === '') {
       callback(new Error('请再次输入密码'))
@@ -30,14 +37,31 @@ const useFormRules = () => {
       callback()
     }
   }
+
+  // 表单规则
   const rules = {
-    password: [{ validator: validatePass, trigger: 'blur' }],
-    password2: [{ validator: validatePass2, trigger: 'blur' }]
+    username: [{ type: 'email', required: true, trigger: 'blur', message: '请输入邮箱用户名' }],
+    nickname: [{ required: true, trigger: 'blur', message: '请输入昵称' }],
+    captcha: [{ required: true, trigger: 'blur', message: '请输入验证码' }],
+    password: [{ validator: validatePass, required: true, trigger: 'blur' }],
+    password2: [{ validator: validatePass2, required: true, trigger: 'blur' }]
   }
+
+  // 表单验证
+  const validate = async () => {
+    return refForm.value?.validate().catch((err) => {
+      ElMessage.error('表单填写错误')
+
+      console.log(err)
+      throw err
+    })
+  }
+
   return {
     formData,
     rules,
-    refForm
+    refForm,
+    validate
   }
 }
 

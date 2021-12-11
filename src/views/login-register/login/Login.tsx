@@ -1,14 +1,19 @@
-import { defineComponent } from 'vue'
+import { defineComponent, toRaw } from 'vue'
 import '../style.scss'
 import Captcha from '@/components/public/captcha/Captcha'
 import { useRouter } from 'vue-router'
 import useFormRules from '@/views/login-register/use-form-rules'
+import { login } from '@/api/login'
 export default defineComponent({
   name: 'Login',
   setup() {
     const router = useRouter()
     const { rules, formData, refForm } = useFormRules()
 
+    const handleLogin = () => {
+      console.log(toRaw(formData))
+      login(toRaw(formData))
+    }
     const handleToRegister = () => {
       router.push({ name: 'Register' })
     }
@@ -43,7 +48,9 @@ export default defineComponent({
               </div>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary">登陆</el-button>
+              <el-button type="primary" onClick={handleLogin}>
+                登陆
+              </el-button>
               <el-button onClick={handleToRegister}>去注册</el-button>
             </el-form-item>
           </el-form>
