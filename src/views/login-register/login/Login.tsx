@@ -1,18 +1,22 @@
-import { defineComponent, toRaw } from 'vue'
+import { defineComponent, ref, toRaw } from 'vue'
 import '../style.scss'
 import Captcha from '@/components/public/captcha/Captcha'
 import { useRouter } from 'vue-router'
 import useFormRules from '@/views/login-register/use-form-rules'
 import { login } from '@/api/login'
+import { ElMessage } from 'element-plus'
 export default defineComponent({
   name: 'Login',
   setup() {
     const router = useRouter()
-    const { rules, formData, refForm } = useFormRules()
+    const { rules, formData, refForm, validate } = useFormRules()
+    const refCaptcha = ref()
 
-    const handleLogin = () => {
-      console.log(toRaw(formData))
-      login(toRaw(formData))
+    const handleLogin = async () => {
+      await validate()
+      formData.captchaId = refCaptcha.value?.captchaId
+      await login(toRaw(formData))
+      ElMessage.success('登陆成功')
     }
     const handleToRegister = () => {
       router.push({ name: 'Register' })
@@ -44,7 +48,7 @@ export default defineComponent({
                   autocomplete="off"
                   style="width:120px"
                 />
-                <Captcha />
+                <Captcha ref={refCaptcha} />
               </div>
             </el-form-item>
             <el-form-item>

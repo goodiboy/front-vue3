@@ -5,14 +5,7 @@ import { LoginForm } from '@/types/login'
 
 const useFormRules = () => {
   const refForm = ref<InstanceType<typeof ElForm>>()
-  const formData = reactive<LoginForm>({
-    username: '',
-    password: '',
-    password2: '',
-    captcha: '',
-    captchaId: '',
-    nickname: ''
-  })
+  const formData = reactive<LoginForm>({} as LoginForm)
 
   // 验证密码是否一致
   const validatePass = (rule: RuleItem, value: any, callback: any) => {
