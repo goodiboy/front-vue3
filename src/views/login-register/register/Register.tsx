@@ -4,6 +4,7 @@ import Captcha from '@/components/public/captcha/Captcha'
 import { useRouter } from 'vue-router'
 import useFormRules from '../use-form-rules'
 import { register } from '@/api/login'
+import { ElMessage } from 'element-plus'
 export default defineComponent({
   name: 'Register',
   setup() {
@@ -17,7 +18,7 @@ export default defineComponent({
       await validate()
       formData.captchaId = refCaptcha.value?.captchaId
       await register(toRaw(formData))
-      // ElMessage.success('注册成功')
+      ElMessage.success('注册成功')
     }
 
     return () => (
