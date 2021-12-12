@@ -25,6 +25,11 @@
       :deep(.el-form-item__label) {
         color: #fff;
       }
+
+      .time-down {
+        margin: 0 10px;
+        color: #f00;
+      }
     }
   }
 }

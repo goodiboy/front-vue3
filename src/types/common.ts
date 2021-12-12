@@ -1,4 +1,5 @@
 export interface CaptchaType {
-  id: string
-  data: SVGElement
+  captchaId: string
+  captcha: SVGElement
+  captchaText: string
 }

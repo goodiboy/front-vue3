@@ -16,6 +16,14 @@ const routes: RouteRecordRaw[] = [
       disableHeader: true
     },
     component: () => import('@/views/login/Register.vue')
+  },
+  {
+    path: '/forget',
+    name: 'Forget',
+    meta: {
+      disableHeader: true
+    },
+    component: () => import('@/views/login/Forget.vue')
   }
 ]
 

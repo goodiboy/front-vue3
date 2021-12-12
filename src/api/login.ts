@@ -9,5 +9,8 @@ const login = (data: LoginForm) => {
 const register = (data: LoginForm) => {
   return AxiosInstance.post('/login/register', data)
 }
+const forget = (data: LoginForm) => {
+  return AxiosInstance.post('/login/forget', data)
+}
 
-export { login, register }
+export { login, register, forget }

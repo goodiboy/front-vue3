@@ -9,13 +9,21 @@
   const router = useRouter()
   const refCaptcha = ref()
   const { rules, formData, refForm, validate } = formValidate()
+
+  // 跳转登录页面
   const handleToLogin = () => {
     router.push({ name: 'Login' })
   }
+
+  // 注册
   const handleRegister = async () => {
-    await validate()
-    formData.captchaId = refCaptcha.value?.captchaId
+    if (!refCaptcha.value) {
+      throw Error('没有拿到验证码信息')
+    }
+    await validate(refCaptcha.value.captchaId, refCaptcha.value.captchaText)
+    delete formData.captchaText
     await register(toRaw(formData))
+
     ElMessage.success('注册成功')
   }
 </script>
@@ -24,14 +32,7 @@
   <div class="login-page">
     <div class="login-container">
       <h1>用户注册</h1>
-      <el-form
-        ref="refForm"
-        :model="formData"
-        :rules="rules"
-        class="form-box"
-        label-width="100px"
-        status-icon
-      >
+      <el-form ref="refForm" :model="formData" :rules="rules" class="form-box" label-width="100px">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="formData.username" type="text" autocomplete="off" />
         </el-form-item>
