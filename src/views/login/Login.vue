@@ -4,7 +4,6 @@
   import Captcha from '@/components/public/captcha/Captcha.vue'
   import formValidate from '@/views/login/form-validate'
   import { login } from '@/api/login'
-  import { ElMessage } from 'element-plus'
   import { CaptchaType } from '@/types/common'
   const refCaptcha = ref<CaptchaType>()
   const router = useRouter()

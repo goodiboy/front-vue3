@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
 
 const AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BASE_REQUIRE_URL,

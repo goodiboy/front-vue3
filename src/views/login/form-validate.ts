@@ -1,7 +1,7 @@
 import { reactive, ref } from 'vue'
-import { ElForm, ElMessage } from 'element-plus'
 import { RuleItem } from 'async-validator'
 import { LoginForm } from '@/types/login'
+import { ElForm } from 'element-plus'
 
 const formValidate = () => {
   const refForm = ref<InstanceType<typeof ElForm>>()
@@ -35,7 +35,7 @@ const formValidate = () => {
   const validatorCaptcha = (rule: RuleItem, value: string | undefined, callback: any) => {
     if (!value?.trim()) {
       callback(new Error('请输入验证码'))
-    } else if (value?.trim().toLocaleLowerCase() !== formData.captchaText.toLocaleLowerCase()) {
+    } else if (value?.trim().toLocaleLowerCase() !== formData.captchaText?.toLocaleLowerCase()) {
       callback(new Error('验证码不正确'))
     } else {
       callback()
