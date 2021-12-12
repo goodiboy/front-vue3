@@ -34,6 +34,7 @@ module.exports = {
   plugins: ['simple-import-sort', 'prettier'],
   // 声明全局属性，因为setup有些全局宏属性，eslint没法识别，需要在这里设置为全局属性
   globals: {
-    defineProps: true
+    defineProps: true,
+    ElMessage: true
   }
 }
