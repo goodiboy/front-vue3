@@ -2,7 +2,7 @@ import { defineComponent, ref, toRaw } from 'vue'
 import '../style.scss'
 import Captcha from '@/components/public/captcha/Captcha'
 import { useRouter } from 'vue-router'
-import useFormRules from '@/views/login-register/use-form-rules'
+import useFormRules from '@/views/login/use-form-rules'
 import { login } from '@/api/login'
 import { ElMessage } from 'element-plus'
 export default defineComponent({
