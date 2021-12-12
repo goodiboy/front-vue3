@@ -4,6 +4,9 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 // eslint-disable-next-line
 // @ts-ignore
 import ElementPlus from 'unplugin-element-plus/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,7 +15,13 @@ export default defineConfig({
     vueJsx({
       transformOn: true // 开启 onClick={login} 支持  on={{ clickOnce: login }}
     }),
-    ElementPlus()
+    ElementPlus(),
+    AutoImport({
+      resolvers: [ElementPlusResolver()]
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()]
+    })
   ],
   resolve: {
     alias: {
