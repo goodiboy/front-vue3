@@ -3,7 +3,7 @@ import { ElForm, ElMessage } from 'element-plus'
 import { RuleItem } from 'async-validator'
 import { LoginForm } from '@/types/login'
 
-const useFormRules = () => {
+const formValidate = () => {
   const refForm = ref<InstanceType<typeof ElForm>>()
   const formData = reactive<LoginForm>({} as LoginForm)
 
@@ -56,4 +56,4 @@ const useFormRules = () => {
   }
 }
 
-export default useFormRules
+export default formValidate

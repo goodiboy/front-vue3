@@ -1,14 +1,14 @@
 <script setup lang="ts">
   import { ref, toRaw } from 'vue'
   import { useRouter } from 'vue-router'
-  import useFormRules from '@/views/login/use-form-rules'
+  import formValidate from '@/views/login/form-validate'
   import { register } from '@/api/login'
   import Captcha from '@/components/public/captcha/Captcha'
   import { ElMessage } from 'element-plus'
 
   const router = useRouter()
   const refCaptcha = ref()
-  const { rules, formData, refForm, validate } = useFormRules()
+  const { rules, formData, refForm, validate } = formValidate()
   const handleToLogin = () => {
     router.push({ name: 'Login' })
   }
