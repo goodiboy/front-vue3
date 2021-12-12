@@ -22,7 +22,7 @@
     .form-box {
       padding: 0 50px 0 20px;
 
-      ::v-deep .el-form-item__label {
+      :deep(.el-form-item__label) {
         color: #fff;
       }
     }

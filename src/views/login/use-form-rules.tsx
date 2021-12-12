@@ -42,10 +42,8 @@ const useFormRules = () => {
 
   // 表单验证
   const validate = async () => {
-    return refForm.value?.validate().catch((err) => {
+    return refForm.value?.validate()?.catch((err) => {
       ElMessage.error('表单填写错误')
-
-      console.log(err)
       throw err
     })
   }

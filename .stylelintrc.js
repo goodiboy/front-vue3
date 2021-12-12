@@ -34,7 +34,12 @@ module.exports = {
         ignore: ['stylelint-commands']
       }
     ],
-    'selector-pseudo-element-no-unknown': null, // 允许未知的标签，例如::v-deep
+    'selector-pseudo-class-no-unknown': [
+      true,
+      {
+        ignorePseudoClasses: ['deep'] // 允许:deep选择器
+      }
+    ],
     'block-no-empty': true, // 禁止出现空块
     'declaration-empty-line-before': 'never', // 要求或禁止在声明语句之前有空行。
     'declaration-block-no-duplicate-properties': true, // 在声明的块中中禁止出现重复的属性

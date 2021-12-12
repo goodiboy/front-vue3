@@ -15,7 +15,7 @@ const routes: RouteRecordRaw[] = [
     meta: {
       disableHeader: true
     },
-    component: () => import('@/views/login/Register')
+    component: () => import('@/views/login/Register.vue')
   }
 ]
 
