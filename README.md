@@ -1,3 +1,7 @@
+# 对应此项目的后台仓库
+
+### 该后台使用ts + node + mongodb + redis   [接口源码，点击跳转](https://github.com/goodiboy/back-vue)
+
 # Vue 3 + Typescript + Vite
 
 This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
