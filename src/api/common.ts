@@ -1,9 +1,9 @@
 import AxiosInstance from '@/plugin/axios'
-import { CaptchaType } from '@/types/common'
+import { CaptchaType, ResponseType } from '@/types/common'
 
 // 获取验证码
 const getCaptcha = () => {
-  return AxiosInstance.get('/common/getCaptcha') as Promise<CaptchaType>
+  return AxiosInstance.get('/common/getCaptcha') as Promise<ResponseType<CaptchaType>>
 }
 
 export { getCaptcha }

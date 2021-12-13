@@ -22,7 +22,7 @@ AxiosInstance.interceptors.response.use(
   (response) => {
     console.log(response)
     if (response.data.code === 200) {
-      return Promise.resolve(response.data.data)
+      return Promise.resolve(response.data)
     } else {
       if (!response.config.custom?.disableMsg) {
         ElMessage.error(response.data.msg)

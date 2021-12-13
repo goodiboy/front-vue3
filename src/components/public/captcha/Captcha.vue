@@ -10,9 +10,9 @@
   })
   const getCaptchaData = async () => {
     const res = await getCaptcha()
-    captcha.value = res.captcha
-    captchaId.value = res.captchaId
-    captchaText.value = res.captchaText
+    captcha.value = res.data.captcha
+    captchaId.value = res.data.captchaId
+    captchaText.value = res.data.captchaText
   }
   defineExpose({
     captchaId,
