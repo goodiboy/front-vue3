@@ -14,8 +14,8 @@
       throw Error('没有拿到验证码信息')
     }
     await validate(refCaptcha.value.captchaId, refCaptcha.value.captchaText)
-    await forget(toRaw(formData))
-    ElMessage.success('验证成功')
+    const res = await forget(toRaw(formData))
+    ElMessage.success(res.msg)
   }
 
   // 跳转登录页面
