@@ -10,7 +10,7 @@ const register = (data: LoginForm) => {
   return AxiosInstance.post('/login/register', data)
 }
 const forget = (data: LoginForm) => {
-  return AxiosInstance.post('/login/forget', data)
+  return AxiosInstance.post('/login/reset', data)
 }
 
 export { login, register, forget }

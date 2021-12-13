@@ -15,7 +15,6 @@
       throw Error('没有拿到验证码信息')
     }
     await validate(refCaptcha.value.captchaId, refCaptcha.value.captchaText)
-    delete formData.captchaText
     await login(toRaw(formData))
     ElMessage.success('登陆成功')
   }
@@ -57,7 +56,7 @@
           <el-button @click="handleToRegister">去注册</el-button>
         </el-form-item>
       </el-form>
-      <el-button type="text" class="forget-btn" @click="handleToForget"> 找回密码 </el-button>
+      <el-button type="text" class="forget-btn" @click="handleToForget"> 重置密码 </el-button>
     </div>
   </div>
 </template>

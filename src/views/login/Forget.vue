@@ -14,7 +14,6 @@
       throw Error('没有拿到验证码信息')
     }
     await validate(refCaptcha.value.captchaId, refCaptcha.value.captchaText)
-    delete formData.captchaText
     await forget(toRaw(formData))
     ElMessage.success('验证成功')
   }
@@ -23,11 +22,16 @@
   const handleToLogin = () => {
     router.push({ name: 'Login' })
   }
+
+  // 跳转注册页面
+  const handleToRegister = () => {
+    router.push({ name: 'Register' })
+  }
 </script>
 <template>
   <div class="login-page">
     <div class="login-container">
-      <h1>密码找回</h1>
+      <h1>重置密码</h1>
       <el-form ref="refForm" :model="formData" :rules="rules" class="form-box" label-width="75px">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="formData.username" type="text" autocomplete="off" />
@@ -43,7 +47,8 @@
           </div>
         </el-form-item>
         <el-form-item>
-          <el-button style="width: 100%" type="primary" @click="handleForget"> 确认 </el-button>
+          <el-button type="primary" @click="handleForget"> 重置密码 </el-button>
+          <el-button @click="handleToRegister"> 去注册 </el-button>
         </el-form-item>
       </el-form>
       <el-button

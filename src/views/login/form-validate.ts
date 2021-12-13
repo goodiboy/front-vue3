@@ -59,10 +59,15 @@ const formValidate = () => {
     formData.captchaText = captchaText
     formData.captchaId = captchaId
 
-    return refForm.value?.validate()?.catch((err) => {
-      ElMessage.error('表单填写错误')
-      throw err
-    })
+    return refForm.value
+      ?.validate()
+      ?.catch((err) => {
+        ElMessage.error('表单填写错误')
+        throw err
+      })
+      .finally(() => {
+        delete formData.captchaText // 表单验证完之后删除这个校验属性，不传到后端
+      })
   }
 
   return {

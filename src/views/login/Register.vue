@@ -20,7 +20,6 @@
       throw Error('没有拿到验证码信息')
     }
     await validate(refCaptcha.value.captchaId, refCaptcha.value.captchaText)
-    delete formData.captchaText
     await register(toRaw(formData))
 
     ElMessage.success('注册成功')
