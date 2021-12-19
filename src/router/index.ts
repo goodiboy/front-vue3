@@ -2,6 +2,11 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   {
+    path: '/home',
+    name: 'Home',
+    component: () => import('@/views/home/Home.vue')
+  },
+  {
     path: '/login',
     name: 'Login',
     meta: {
@@ -31,5 +36,4 @@ const router = createRouter({
   routes,
   history: createWebHistory()
 })
-
 export default router

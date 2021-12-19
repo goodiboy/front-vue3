@@ -1,4 +1,4 @@
-import AxiosInstance from '@/plugin/axios'
+import AxiosInstance from '@/utils/axios'
 import { CaptchaType } from '@/types/common'
 
 // 获取验证码

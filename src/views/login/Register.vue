@@ -4,7 +4,9 @@
   import formValidate from '@/views/login/form-validate'
   import { register } from '@/api/login'
   import Captcha from '@/components/public/captcha/Captcha.vue'
+  import { useStorage } from '@/utils/storage/storage'
 
+  const storage = useStorage()
   const router = useRouter()
   const refCaptcha = ref()
   const { rules, formData, refForm, validate } = formValidate()
@@ -20,9 +22,10 @@
       throw Error('没有拿到验证码信息')
     }
     await validate(refCaptcha.value.captchaId, refCaptcha.value.captchaText)
-    await register(toRaw(formData))
-
+    const res = await register(toRaw(formData))
     ElMessage.success('注册成功')
+    storage.setItem('userInfo', res.data)
+    router.replace({ name: 'Home' })
   }
 </script>
 

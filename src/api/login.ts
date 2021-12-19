@@ -1,8 +1,7 @@
-import AxiosInstance from '@/plugin/axios'
+import AxiosInstance from '@/utils/axios'
 import { LoginForm } from '@/types/login'
 
 const login = (data: LoginForm) => {
-  console.log(data)
   return AxiosInstance.post('/login/login', data)
 }
 

@@ -13,14 +13,12 @@ AxiosInstance.interceptors.request.use(
     return config
   },
   (error) => {
-    console.log(error)
     return Promise.reject(error)
   }
 )
 
 AxiosInstance.interceptors.response.use(
   (response) => {
-    console.log(response)
     if (response.data.code === 200) {
       return Promise.resolve(response.data)
     } else {

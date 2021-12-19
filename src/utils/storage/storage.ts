@@ -1,8 +1,10 @@
+import { App } from 'vue'
+
 interface KeyType {
   value: any
   expires?: number
 }
-export default class Storage {
+class Storage {
   // 默认的作用域
   namespace = '__default__'
 
@@ -80,4 +82,24 @@ export default class Storage {
   getStorage() {
     return JSON.parse(localStorage.getItem(this.namespace) ?? '{}')
   }
+}
+
+let storageInstance: Storage
+
+export default {
+  install(app: App, namespaced: any) {
+    if (typeof namespaced !== 'string') {
+      throw Error('key must be string')
+    }
+    storageInstance = new Storage(namespaced)
+  }
+}
+
+// 暂时没有想到比较好的方法，先这样处理吧
+// 暂时没有想到比较好的方法，先这样处理吧
+export const useStorage = () => {
+  if (!storageInstance) {
+    throw Error('must be instantiated before use, example: app.use(storage,key)')
+  }
+  return storageInstance
 }
