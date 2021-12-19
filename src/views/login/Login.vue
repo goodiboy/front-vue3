@@ -5,17 +5,21 @@
   import formValidate from '@/views/login/form-validate'
   import { login } from '@/api/login'
   import { CaptchaType } from '@/types/common'
+  import { useStore } from '@/store'
+
+  const store = useStore()
   const refCaptcha = ref<CaptchaType>()
   const router = useRouter()
   const { rules, formData, refForm, validate } = formValidate()
-
   // 登录
   const handleLogin = async () => {
+    console.log(store.state.userInfoModule.nickname)
     if (!refCaptcha.value) {
       throw Error('没有拿到验证码信息')
     }
     await validate(refCaptcha.value.captchaId, refCaptcha.value.captchaText)
-    await login(toRaw(formData))
+    const res = await login(toRaw(formData))
+    store.commit('userInfoModule/setUserInfo', res.data)
     ElMessage.success('登陆成功')
   }
 
