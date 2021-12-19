@@ -1,37 +1,14 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+const modulesFiles = import.meta.globEager('./modules/*.ts')
 
-const routes: RouteRecordRaw[] = [
-  {
-    path: '/home',
-    name: 'Home',
-    component: () => import('@/views/home/Home.vue')
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    meta: {
-      disableHeader: true
-    },
-    component: () => import('@/views/login/Login.vue')
-  },
-  {
-    path: '/register',
-    name: 'Register',
-    meta: {
-      disableHeader: true
-    },
-    component: () => import('@/views/login/Register.vue')
-  },
-  {
-    path: '/forget',
-    name: 'Forget',
-    meta: {
-      disableHeader: true
-    },
-    component: () => import('@/views/login/Forget.vue')
-  }
-]
+let routes: RouteRecordRaw[] = []
+const modules = Object.values(modulesFiles)
 
+modules.forEach((item) => {
+  routes = routes.concat(item.default as RouteRecordRaw[])
+})
+
+console.log(routes)
 const router = createRouter({
   routes,
   history: createWebHistory()
