@@ -50,7 +50,7 @@
               v-model="formData.captcha"
               type="text"
               autocomplete="off"
-              style="width: 120px"
+              style="width: 120px; color: #fff"
             />
             <Captcha ref="refCaptcha" />
           </div>
