@@ -96,7 +96,6 @@ export default {
 }
 
 // 暂时没有想到比较好的方法，先这样处理吧
-// 暂时没有想到比较好的方法，先这样处理吧
 export const useStorage = () => {
   if (!storageInstance) {
     throw Error('must be instantiated before use, example: app.use(storage,key)')

@@ -1,14 +1,13 @@
 import { InjectionKey } from 'vue'
 import { createStore, useStore as baseUseStore, Store } from 'vuex'
-import { userInfoModule } from '@/store/userInfo'
-import { UserInfo } from '@/types/UserInfo'
+import { userInfoModule, UserInfoState } from '@/store/userInfo'
 
 export interface RootState {
   count: number
 }
 
 export interface RootStateTypes extends RootState {
-  userInfoModule: UserInfo
+  userInfoModule: UserInfoState
 }
 
 export const key: InjectionKey<Store<RootState>> = Symbol()

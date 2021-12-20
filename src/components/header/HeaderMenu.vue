@@ -8,14 +8,23 @@
 </script>
 <template>
   <el-row v-if="!disableHeader" :gutter="20" class="header">
-    <el-col :span="20">
+    <el-col :span="18">
       <Left />
     </el-col>
-    <el-col :span="4">
+    <el-col :span="6">
       <Right />
     </el-col>
   </el-row>
 </template>
 <style scoped lang="scss">
-  @import './header';
+  .header {
+    height: 60px;
+    padding-left: 30px;
+    background: $header-bg-color;
+
+    .menu-icon {
+      margin-top: -2px;
+      margin-right: 5px;
+    }
+  }
 </style>

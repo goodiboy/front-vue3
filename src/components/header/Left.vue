@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { ChatDotRound, Expand, Help } from '@element-plus/icons'
+  import { headerStyle } from '@/assets/config-style/variable'
 
   const activeIndex = ref('1')
 </script>
@@ -8,9 +9,9 @@
   <el-menu
     :default-active="activeIndex"
     mode="horizontal"
-    background-color="#545c64"
-    text-color="#fff"
-    active-text-color="#ffd04b"
+    :background-color="headerStyle.bgColor"
+    :text-color="headerStyle.leftTextColor"
+    :active-text-color="headerStyle.leftActiveTextColor"
   >
     <el-menu-item index="1">
       <div class="flex flex-align-center">
@@ -39,5 +40,8 @@
   </el-menu>
 </template>
 <style scoped lang="scss">
-  @import './header';
+  .menu-icon {
+    margin-top: -2px;
+    margin-right: 5px;
+  }
 </style>
