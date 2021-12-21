@@ -3,6 +3,7 @@
   import Right from './Right.vue'
   import Left from './Left.vue'
   import { computed } from 'vue'
+  import { headerStyle } from '@/assets/theme'
   const route = useRoute()
   const disableHeader = computed(() => route.meta?.disableHeader)
 </script>
@@ -20,7 +21,7 @@
   .header {
     height: 60px;
     padding-left: 30px;
-    background: $header-bg-color;
+    background: v-bind('headerStyle.bgColor');
 
     .menu-icon {
       margin-top: -2px;

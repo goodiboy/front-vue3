@@ -2,6 +2,7 @@
   import { useStore } from '@/store'
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
+  import { headerStyle } from '@/assets/theme'
 
   const store = useStore()
   const router = useRouter()
@@ -43,7 +44,7 @@
   .el-menu {
     justify-content: flex-end;
     width: 150px;
-    background: $header-bg-color;
+    background: v-bind('headerStyle.bgColor');
 
     :deep(.el-sub-menu__title) {
       background-color: inherit; // 不使用el-menu的属性配置，是为了统一使用全局的颜色，方便更改

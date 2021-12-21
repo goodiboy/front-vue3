@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { ChatDotRound, Expand, Help } from '@element-plus/icons'
-  import { headerStyle } from '@/assets/theme/variable'
+  import { headerStyle } from '@/assets/theme'
 
   const activeIndex = ref('1')
 </script>
