@@ -3,32 +3,43 @@ import { UserInfo } from '@/types/UserInfo'
 import { RootState } from '@/store'
 
 export interface UserInfoState {
-  token: string
-  userInfo: UserInfo
+  token?: string
+  userInfo?: UserInfo
 }
 
-export const userInfoModule: Module<UserInfoState | null, RootState> = {
+export const userInfoModule: Module<UserInfoState, RootState> = {
   namespaced: true,
-  state: null,
+  // 这里的state会被proxy代理
+  state: {} as UserInfoState,
 
   getters: {
     username(state) {
-      return state?.userInfo.username
+      if (!state.userInfo) return undefined
+      return state.userInfo.username
     },
     nickname(state) {
-      return state?.userInfo.nickname
+      if (!state.userInfo) return undefined
+      return state.userInfo.nickname
     },
     token(state) {
-      return state?.token
+      if (!state.token) return undefined
+      return state.token
     },
     isLogin(state) {
-      return !!state
+      return !!state.token
     }
   },
 
   mutations: {
-    setUserInfo(state, data: UserInfoState) {
-      Object.assign(state, data)
+    setUserInfo(state, data: UserInfoState | null) {
+      if (!data) {
+        state.token = undefined
+        state.userInfo = undefined
+      } else {
+        state.token = data.token
+        state.userInfo = data.userInfo
+        // Object.assign(state, data)
+      }
     }
   }
 }

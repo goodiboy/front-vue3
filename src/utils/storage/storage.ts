@@ -19,7 +19,7 @@ class Storage {
    * @param expires 有效期，时间单位秒，
    */
   setItem(key: string, val: any, expires?: number) {
-    const setEvent = new Event(key)
+    const setEvent = new Event(`set:${key}`)
     setEvent.newValue = val
     const valueObj: KeyType = {
       value: val,
@@ -63,6 +63,8 @@ class Storage {
 
   // 删除值
   removeItem(key: string) {
+    const removeEvent = new Event(`remove:${key}`)
+    dispatchEvent(removeEvent)
     const storage = this.getStorage()
     delete storage[key]
     this.updateStorage(storage)
@@ -70,6 +72,8 @@ class Storage {
 
   // 清除作用域下的所有值，非整个localStorage
   clearAll() {
+    const clearEvent = new Event('clearAll')
+    dispatchEvent(clearEvent)
     localStorage.removeItem(this.namespace)
   }
 

@@ -3,7 +3,9 @@
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
   import { headerStyle } from '@/assets/theme'
+  import { useStorage } from '@/utils/storage/storage'
 
+  const storage = useStorage()
   const store = useStore()
   const router = useRouter()
   const isLogin = ref(store.getters['userInfoModule/isLogin'])
@@ -11,6 +13,11 @@
 
   if (isLogin.value) {
     username.value = store.getters['userInfoModule/nickname']
+  }
+
+  const signOut = () => {
+    storage.clearAll()
+    router.replace({ name: 'Login' })
   }
 </script>
 <template>
@@ -24,6 +31,7 @@
           </div>
         </template>
         <el-menu-item>个人信息</el-menu-item>
+        <el-menu-item @click="signOut">退出</el-menu-item>
       </el-sub-menu>
     </el-menu>
 
