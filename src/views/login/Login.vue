@@ -19,7 +19,7 @@
     await validate(refCaptcha.value.captchaId, refCaptcha.value.captchaText)
     const res = await login(toRaw(formData))
     ElMessage.success('登陆成功')
-    storage.setItem('userInfo', res.data)
+    storage.setItem('userInfo', res.data, 60 * 60 * 24)
     router.replace({ name: 'Home' })
   }
 
