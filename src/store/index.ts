@@ -1,6 +1,6 @@
 import { InjectionKey } from 'vue'
 import { createStore, useStore as baseUseStore, Store } from 'vuex'
-import { userInfoModule, UserInfoState } from '@/store/userInfo'
+import { userInfoModule, UserInfoState } from '@/store/modules/userInfo'
 
 export interface RootState {
   count: number

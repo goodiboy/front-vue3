@@ -1,6 +1,6 @@
 import { Module } from 'vuex'
 import { UserInfo } from '@/types/UserInfo'
-import { RootState } from '@/store/index'
+import { RootState } from '@/store'
 
 export interface UserInfoState {
   token: string
