@@ -7,8 +7,10 @@
 </script>
 <template>
   <el-menu
+    class="left-menu"
     :default-active="activeIndex"
     mode="horizontal"
+    :ellipsis="false"
     :background-color="headerStyle.bgColor"
     :text-color="headerStyle.leftTextColor"
     :active-text-color="headerStyle.leftActiveTextColor"
@@ -43,5 +45,13 @@
   .menu-icon {
     margin-top: -2px;
     margin-right: 5px;
+  }
+
+  .left-menu {
+    border-bottom: 0;
+
+    :deep(.el-menu-item) {
+      border-bottom: 0;
+    }
   }
 </style>

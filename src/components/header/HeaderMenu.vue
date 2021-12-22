@@ -8,19 +8,17 @@
   const disableHeader = computed(() => route.meta?.disableHeader)
 </script>
 <template>
-  <el-row v-if="!disableHeader" :gutter="20" class="header">
-    <el-col :span="18">
-      <Left />
-    </el-col>
-    <el-col :span="6">
-      <Right />
-    </el-col>
-  </el-row>
+  <div v-if="!disableHeader" class="header">
+    <Left />
+    <Right />
+  </div>
 </template>
 <style scoped lang="scss">
   .header {
+    display: flex;
+    justify-content: space-between;
     height: 60px;
-    padding-left: 30px;
+    padding: 0 30px;
     background: v-bind('headerStyle.bgColor');
 
     .menu-icon {

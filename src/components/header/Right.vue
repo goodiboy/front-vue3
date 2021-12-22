@@ -55,6 +55,7 @@
     background: v-bind('headerStyle.bgColor');
 
     :deep(.el-sub-menu__title) {
+      padding: 0;
       background-color: inherit; // 不使用el-menu的属性配置，是为了统一使用全局的颜色，方便更改
       border-bottom: 0;
 
