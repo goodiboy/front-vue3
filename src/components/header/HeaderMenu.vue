@@ -18,7 +18,8 @@
     display: flex;
     justify-content: space-between;
     height: 60px;
-    padding: 0 30px;
+    padding-right: 30px;
+    padding-left: 10px;
     background: v-bind('headerStyle.bgColor');
 
     .menu-icon {
