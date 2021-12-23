@@ -2,13 +2,21 @@
   import { useRoute } from 'vue-router'
   import Right from './Right.vue'
   import Left from './Left.vue'
-  import { computed } from 'vue'
+  import { ref, watch } from 'vue'
   import { headerStyle } from '@/assets/theme'
   const route = useRoute()
-  const disableHeader = computed(() => route.meta?.disableHeader)
+  const disableHeader = ref(true)
+
+  // 使用watchEffect和computed会计算了一次默认值false（还没获取到disableHeader）闪一下
+  watch(
+    () => route.meta,
+    () => {
+      disableHeader.value = !!route.meta?.disableHeader
+    }
+  )
 </script>
 <template>
-  <div v-if="!disableHeader" class="header">
+  <div v-show="!disableHeader" class="header">
     <Left />
     <Right />
   </div>
