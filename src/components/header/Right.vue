@@ -16,7 +16,7 @@
   }
 
   const signOut = () => {
-    storage.clearAll()
+    storage.removeItem('userInfo')
     router.replace({ name: 'Login' })
   }
 </script>

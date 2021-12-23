@@ -13,7 +13,7 @@ const listenUserInfo = () => {
   }
 
   // 当userInfo发生变化的时候，更新vuex的userInfo
-  storage.on('set:userInfo', (event) => {
+  storage.on('userInfo', (event) => {
     store.commit('userInfoModule/setUserInfo', event.newValue)
   })
 

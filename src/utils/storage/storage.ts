@@ -19,7 +19,7 @@ class Storage {
    * @param expires 有效期，时间单位秒，
    */
   setItem(key: string, val: any, expires?: number) {
-    const setEvent = new Event(`set:${key}`)
+    const setEvent = new Event(key)
     setEvent.newValue = val
     const valueObj: KeyType = {
       value: val,
@@ -63,7 +63,7 @@ class Storage {
 
   // 删除值
   removeItem(key: string) {
-    const removeEvent = new Event(`remove:${key}`)
+    const removeEvent = new Event(key)
     dispatchEvent(removeEvent)
     const storage = this.getStorage()
     delete storage[key]
