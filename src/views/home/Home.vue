@@ -2,5 +2,12 @@
   console.log('home')
 </script>
 <template>
-  <div> htmo </div>
+  <div class="home">
+    <hom-menu />
+  </div>
 </template>
+<style scoped lang="scss">
+  .home {
+    background: #f2f2f2;
+  }
+</style>

@@ -15,6 +15,13 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()]
     })
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@/assets/theme/base.scss";`
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src')
