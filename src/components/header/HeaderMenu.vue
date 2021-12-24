@@ -17,18 +17,24 @@
 </script>
 <template>
   <div v-show="!disableHeader" class="header">
-    <Left />
-    <Right />
+    <div class="main">
+      <Left />
+      <Right />
+    </div>
   </div>
 </template>
 <style scoped lang="scss">
   .header {
-    display: flex;
-    justify-content: space-between;
     height: 60px;
-    padding-right: 30px;
-    padding-left: 10px;
     background: v-bind('headerStyle.bgColor');
+
+    .main {
+      display: flex;
+      justify-content: space-between;
+      width: $main-width;
+      height: inherit;
+      margin: 0 auto;
+    }
 
     .menu-icon {
       margin-top: -2px;

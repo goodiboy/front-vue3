@@ -3,35 +3,41 @@
 </script>
 <template>
   <div class="home-menu">
-    <ul class="left-menu">
-      <li class="menu-item">首页</li>
-      <li class="menu-item">提问</li>
-      <li class="menu-item">分享</li>
-      <li class="menu-item">讨论</li>
-      <li class="menu-item">建议</li>
-      <li class="menu-item">公告</li>
-      <li class="menu-item">动态</li>
-      <li class="line"></li>
-      <li class="menu-item">我的发帖</li>
-      <li class="menu-item">我的收藏</li>
-    </ul>
-    <div class="right-btn">
-      <el-icon class="search-btn">
-        <search />
-      </el-icon>
-      <el-button color="#009688" style="color: white">发布新帖</el-button>
-    </div>
+    <main class="main">
+      <ul class="left-menu">
+        <li class="menu-item">首页</li>
+        <li class="menu-item">提问</li>
+        <li class="menu-item">分享</li>
+        <li class="menu-item">讨论</li>
+        <li class="menu-item">建议</li>
+        <li class="menu-item">公告</li>
+        <li class="menu-item">动态</li>
+        <li class="line"></li>
+        <li class="menu-item">我的发帖</li>
+        <li class="menu-item">我的收藏</li>
+      </ul>
+      <div class="right-btn">
+        <el-icon class="search-btn">
+          <search />
+        </el-icon>
+        <el-button size="medium" color="#009688" style="color: white">发布新帖</el-button>
+      </div>
+    </main>
   </div>
 </template>
 <style scoped lang="scss">
   .home-menu {
-    display: flex;
-    justify-content: space-between;
     height: 50px;
-    padding-right: 30px;
-    padding-left: 10px;
     background: #fff;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+
+    .main {
+      display: flex;
+      justify-content: space-between;
+      width: $main-width;
+      height: inherit;
+      margin: 0 auto;
+    }
 
     .left-menu {
       display: flex;
