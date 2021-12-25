@@ -37,7 +37,7 @@
           <el-input v-model="formData.username" type="text" autocomplete="off" />
         </el-form-item>
         <el-form-item label="验证码" prop="captcha">
-          <div class="flex flex-align-center">
+          <div class="flex-align-center">
             <el-input v-model="formData.captcha" type="text" style="width: 120px">
               <template #suffix>
                 <span class="time-down"></span>

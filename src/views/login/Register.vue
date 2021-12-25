@@ -47,7 +47,7 @@
           <el-input v-model="formData.password2" type="password" autocomplete="off" />
         </el-form-item>
         <el-form-item label="验证码" prop="captcha">
-          <div class="flex flex-align-center">
+          <div class="flex-align-center">
             <el-input
               v-model="formData.captcha"
               type="text"

@@ -16,7 +16,7 @@
     :active-text-color="headerStyle.leftActiveTextColor"
   >
     <el-menu-item index="1">
-      <div class="flex flex-align-center">
+      <div class="flex-align-center">
         <el-icon :size="20" class="menu-icon">
           <ChatDotRound />
         </el-icon>
@@ -24,7 +24,7 @@
       </div>
     </el-menu-item>
     <el-menu-item index="2">
-      <div class="flex flex-align-center">
+      <div class="flex-align-center">
         <el-icon :size="20" class="menu-icon">
           <Expand />
         </el-icon>
@@ -32,7 +32,7 @@
       </div>
     </el-menu-item>
     <el-menu-item index="3">
-      <div class="flex flex-align-center">
+      <div class="flex-align-center">
         <el-icon :size="20" class="menu-icon">
           <Help />
         </el-icon>
