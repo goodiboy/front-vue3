@@ -76,6 +76,11 @@
       h3 {
         padding-right: 15px;
         font-size: 16px;
+
+        &:hover {
+          color: $text-active-color;
+          cursor: pointer;
+        }
       }
 
       .tag {
