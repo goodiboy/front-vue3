@@ -1,12 +1,13 @@
 <script setup lang="ts">
   import HomeLeft from '@/components/home/HomeLeft.vue'
+  import HomeRight from '@/components/home/HomeRight.vue'
 
   console.log('home')
 </script>
 <template>
   <div class="home">
     <home-left />
-    <div class="right">1</div>
+    <home-right />
   </div>
 </template>
 

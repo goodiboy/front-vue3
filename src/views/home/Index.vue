@@ -11,5 +11,6 @@
   .home-main {
     width: $main-width;
     margin: 15px auto 0;
+    overflow: hidden;
   }
 </style>
