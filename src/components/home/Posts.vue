@@ -35,7 +35,8 @@
 <style scoped lang="scss">
   .posts {
     display: flex;
-    padding: 15px 0;
+    padding: 15px;
+    border-bottom: 1px dotted #e2e2e2;
   }
 
   .avatar {
