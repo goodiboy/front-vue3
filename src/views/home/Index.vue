@@ -1,9 +1,11 @@
 <script setup lang="ts">
+  import HomeMenu from '@/components/home/HomeMenu.vue'
+
   console.log('index')
 </script>
 <template>
   <div class="root-home">
-    <hom-menu />
+    <home-menu />
     <router-view class="home-main" />
   </div>
 </template>

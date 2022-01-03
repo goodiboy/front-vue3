@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import TabItem from '@/components/public/Tabs/TabItem.vue'
+</script>
 <template>
   <div class="home-left">
     <div class="pane">

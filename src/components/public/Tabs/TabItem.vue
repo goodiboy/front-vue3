@@ -2,9 +2,7 @@
   import { inject } from 'vue'
   import type { TabProps } from '@/components/public/Tabs/type'
 
-  const props = defineProps({
-    label: { type: String, required: true }
-  })
+  const props = defineProps<{ label?: string }>()
 
   const tabProps = inject('tabs') as TabProps
   const tabUpdate = inject('update') as (val?: string) => void
