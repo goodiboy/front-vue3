@@ -1,5 +1,5 @@
 import { Module } from 'vuex'
-import { UserInfo } from '@/types/UserInfo'
+import type { UserInfo } from '@/types/UserInfo'
 import { RootState } from '@/store'
 
 export interface UserInfoState {

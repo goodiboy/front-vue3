@@ -4,7 +4,7 @@
   import Captcha from '@/components/public/captcha/Captcha.vue'
   import formValidate from '@/views/login/form-validate'
   import { login } from '@/api/login'
-  import { CaptchaType } from '@/types/common'
+  import type { CaptchaType } from '@/types/common'
   import { useStorage } from '@/utils/storage/storage'
 
   const storage = useStorage()

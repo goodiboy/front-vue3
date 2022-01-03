@@ -1,7 +1,7 @@
 import { reactive, ref } from 'vue'
-import { RuleItem } from 'async-validator'
-import { LoginForm } from '@/types/login'
-import { ElForm } from 'element-plus'
+import type { RuleItem } from 'async-validator'
+import type { LoginForm } from '@/types/login'
+import type { ElForm } from 'element-plus'
 
 const formValidate = () => {
   const refForm = ref<InstanceType<typeof ElForm>>()

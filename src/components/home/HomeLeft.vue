@@ -1,10 +1,10 @@
-<script setup lang="ts">
-  const tabList = ['置顶']
-</script>
+<script setup lang="ts"></script>
 <template>
   <div class="home-left">
     <div class="pane">
-      <tabs :is-click="false" :tab-list="tabList" />
+      <tabs :is-click="false">
+        <tab-item label="置顶" />
+      </tabs>
       <posts v-for="item of 4" :key="item" />
     </div>
   </div>

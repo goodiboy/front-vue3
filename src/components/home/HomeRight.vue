@@ -1,13 +1,36 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  import { ref } from 'vue'
+
+  const paneSignActive = ref('签到')
+</script>
 <template>
   <div class="home-right">
     <div class="pane">
-      <tabs :is-click="false" :tab-list="['温馨通道']" />
+      <tabs :is-click="false">
+        <tab-item label="温馨通道" />
+      </tabs>
       <ul class="cozy-link ellipsis">
         <li v-for="item of 5" :key="item">
-          <router-link to="" class="link-item ellipsis"
-            >温馨通道温馨通道温馨通道温馨通道温馨通道温馨通道温馨通道</router-link
-          >
+          <router-link to="" class="link-item ellipsis">
+            温馨通道温馨通道温馨通道温馨通道温馨通道温馨通道温馨通道
+          </router-link>
+        </li>
+      </ul>
+    </div>
+    <div class="pane">
+      <tabs v-model="paneSignActive" :is-click="true" color="#01aaed" active="#333">
+        <tab-item label="签到" />
+        <tab-item label="说明" />
+        <tab-item label="活跃榜" />
+        <template #right>
+          <div class="sign">已连续签到<span>16</span>天</div>
+        </template>
+      </tabs>
+      <ul class="cozy-link ellipsis">
+        <li v-for="item of 5" :key="item">
+          <router-link to="" class="link-item ellipsis">
+            温馨通道温馨通道温馨通道温馨通道温馨通道温馨通道温馨通道
+          </router-link>
         </li>
       </ul>
     </div>
@@ -21,6 +44,10 @@
 
   .pane {
     background: #fff;
+
+    & + .pane {
+      margin-top: 10px;
+    }
   }
 
   .cozy-link {
@@ -37,6 +64,14 @@
       line-height: 26px;
       color: #01aaed;
       text-decoration: none;
+    }
+  }
+
+  .sign {
+    color: $dark-text-color;
+
+    span {
+      color: $height-light-color;
     }
   }
 </style>
