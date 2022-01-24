@@ -4,6 +4,11 @@
   import { useRouter } from 'vue-router'
   import { useStorage } from '@/utils/storage/storage'
 
+  enum Command {
+    SIGN_OUT = 'SIGN_OUT',
+    INFO = 'INFO'
+  }
+
   const storage = useStorage()
   const store = useStore()
   const router = useRouter()
@@ -14,33 +19,28 @@
     username.value = store.getters['userInfoModule/nickname']
   }
 
-  const signOut = () => {
+  const handleCommand = (command: Command) => {
+    if (command !== Command.SIGN_OUT) return
     storage.removeItem('userInfo')
     router.replace({ name: 'Login' })
   }
 </script>
 <template>
   <div class="right">
-    <el-menu
-      v-if="isLogin"
-      class="el-menu"
-      active-text-color="#333"
-      default-active="1"
-      mode="horizontal"
-      :ellipsis="false"
-    >
-      <el-sub-menu index="1">
-        <template #title>
-          <div class="menu-title">
-            <img src="@/assets/img/common/avatar.png" class="avatar" alt="头像" />
-            <span class="text"> {{ username }} </span>
-          </div>
-        </template>
-        <el-menu-item>个人信息</el-menu-item>
-        <el-menu-item @click="signOut">退出</el-menu-item>
-      </el-sub-menu>
-    </el-menu>
-
+    <el-dropdown v-if="isLogin" @command="handleCommand">
+      <div class="menu-title">
+        <el-badge :value="200" :max="99">
+          <img src="@/assets/img/common/avatar.png" class="avatar" alt="头像" />
+        </el-badge>
+        <span class="text"> {{ username }} </span>
+      </div>
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item :command="Command.INFO">个人信息</el-dropdown-item>
+          <el-dropdown-item :command="Command.SIGN_OUT">退出</el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
     <el-button v-else type="text" style="color: #333" @click="router.push({ name: 'Login' })">
       登录 / 注册
     </el-button>
@@ -55,31 +55,10 @@
     color: #fff;
   }
 
-  .el-menu {
-    justify-content: flex-end;
-    width: 150px;
-
-    :deep(.el-sub-menu__title) {
-      height: 50px;
-      padding: 0;
-      line-height: 50px;
-      background-color: inherit; // 不使用el-menu的属性配置，是为了统一使用全局的颜色，方便更改
-      border-bottom: 0 !important;
-
-      &:hover {
-        background-color: inherit;
-      }
-
-      .el-sub-menu__icon-arrow {
-        font-size: 14px;
-        color: #333;
-      }
-    }
-  }
-
   .menu-title {
     display: flex;
     align-items: center;
+    cursor: pointer;
 
     .avatar {
       flex-shrink: 0;

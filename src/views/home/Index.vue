@@ -1,8 +1,12 @@
 <script setup lang="ts">
   import { Setting, Fold } from '@element-plus/icons'
+  import { ref } from 'vue'
 
-  console.log('index')
-  const isCollapse = false
+  const isCollapse = ref(false)
+
+  const toggleSideMenu = () => {
+    isCollapse.value = !isCollapse.value
+  }
 </script>
 <template>
   <div class="home">
@@ -46,11 +50,9 @@
       <div class="content-right">
         <div class="nav-top">
           <div class="nav-left">
-            <el-icon class="menu-fold" @click="toggle"><fold /></el-icon>
-
+            <el-icon class="menu-fold" @click="toggleSideMenu"><fold /></el-icon>
             <div class="bread">面包屑</div>
           </div>
-
           <user-info />
         </div>
         <div class="wrapper">
@@ -64,11 +66,12 @@
 </template>
 <style scoped lang="scss">
   .basic-layout {
-    position: relative;
+    display: flex;
 
     /**  左侧导航样式  **/
     .nav-side {
-      position: fixed;
+      flex-grow: 0;
+      //transition: width 0.5s;
       width: 200px;
       //100vh 自动计算高度
       height: 100vh;
@@ -106,15 +109,7 @@
 
     /** 右侧页面内容样式 **/
     .content-right {
-      margin-left: 200px;
-      // 合并左侧菜单
-      &.fold {
-        margin-left: 64px;
-      }
-      // 展开左侧菜单
-      &.unfold {
-        margin-left: 200px;
-      }
+      flex: 1;
 
       /** 右侧导航内容样式 **/
       .nav-top {
@@ -132,6 +127,7 @@
           .menu-fold {
             margin-right: 15px;
             font-size: 18px;
+            cursor: pointer;
           }
         }
       }
