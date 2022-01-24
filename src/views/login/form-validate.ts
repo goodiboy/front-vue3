@@ -22,6 +22,7 @@ const formValidate = () => {
 
   // 验证密码是否一致
   const validatePass2 = (rule: RuleItem, value: string | undefined, callback: any) => {
+    console.log(formData)
     if (!value?.trim()) {
       callback(new Error('请再次输入密码'))
     } else if (value !== formData.password) {
@@ -33,9 +34,10 @@ const formValidate = () => {
 
   // 校验验证码是否正确
   const validatorCaptcha = (rule: RuleItem, value: string | undefined, callback: any) => {
+    console.log(value, formData)
     if (!value?.trim()) {
       callback(new Error('请输入验证码'))
-    } else if (value?.trim().toLocaleLowerCase() !== formData.captchaText?.toLocaleLowerCase()) {
+    } else if (value?.trim() !== formData.captchaText) {
       callback(new Error('验证码不正确'))
     } else {
       callback()
@@ -56,6 +58,7 @@ const formValidate = () => {
     if (!captchaId || !captchaText) {
       throw Error('没有拿到验证码信息')
     }
+    console.log(formData)
     formData.captchaText = captchaText
     formData.captchaId = captchaId
 
