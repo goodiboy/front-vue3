@@ -21,7 +21,14 @@
 </script>
 <template>
   <div class="right">
-    <el-menu v-if="isLogin" class="el-menu" default-active="1" mode="horizontal" :ellipsis="false">
+    <el-menu
+      v-if="isLogin"
+      class="el-menu"
+      active-text-color="#333"
+      default-active="1"
+      mode="horizontal"
+      :ellipsis="false"
+    >
       <el-sub-menu index="1">
         <template #title>
           <div class="menu-title">
