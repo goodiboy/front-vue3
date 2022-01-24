@@ -44,7 +44,13 @@ module.exports = {
     'selector-pseudo-class-no-unknown': [
       true,
       {
-        ignorePseudoClasses: ['deep'] // 允许:deep选择器
+        ignorePseudoClasses: ['deep', 'export'] // 允许:deep选择器
+      }
+    ],
+    'property-no-unknown': [
+      true,
+      {
+        ignoreProperties: ['/^ex/i'] // 允许自定义属性
       }
     ],
     'selector-class-pattern': /^[a-z0-9\-_]*$/, // 只允许中划线，下划线，数字小写字母
