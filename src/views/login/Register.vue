@@ -5,11 +5,12 @@
   import { register } from '@/api/login'
   import Captcha from '@/components/public/captcha/Captcha.vue'
   import { useStorage } from '@/utils/storage/storage'
+  import { CaptchaType } from '@/types/common'
 
   const storage = useStorage()
   const router = useRouter()
-  const refCaptcha = ref()
-  const { rules, formData, refForm, validate } = formValidate()
+  const refCaptcha = ref<CaptchaType>()
+  const { rules, formData, refForm, validate } = formValidate(refCaptcha)
 
   // 跳转登录页面
   const handleToLogin = () => {
@@ -21,7 +22,7 @@
     if (!refCaptcha.value) {
       throw Error('没有拿到验证码信息')
     }
-    await validate(refCaptcha.value.captchaId, refCaptcha.value.captchaText)
+    await validate()
     const res = await register(toRaw(formData))
     ElMessage.success('注册成功')
     storage.setItem('userInfo', res.data, 86400) // 一天 = 60 * 60 * 24 = 86400

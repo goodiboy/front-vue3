@@ -10,13 +10,11 @@
   const storage = useStorage()
   const refCaptcha = ref<CaptchaType>()
   const router = useRouter()
-  const { rules, formData, refForm, validate } = formValidate()
+  const { rules, formData, refForm, validate } = formValidate(refCaptcha)
+
   // 登录
   const handleLogin = async () => {
-    if (!refCaptcha.value) {
-      throw Error('没有拿到验证码信息')
-    }
-    await validate(refCaptcha.value.captchaId, refCaptcha.value.captchaText)
+    await validate()
     const res = await login(toRaw(formData))
     console.log(formData)
     ElMessage.success('登陆成功')

@@ -4,16 +4,17 @@
   import Captcha from '@/components/public/captcha/Captcha.vue'
   import formValidate from '@/views/login/form-validate'
   import { forget } from '@/api/login'
+  import { CaptchaType } from '@/types/common'
 
   const router = useRouter()
-  const { rules, formData, refForm, validate } = formValidate()
-  const refCaptcha = ref()
+  const refCaptcha = ref<CaptchaType>()
+  const { rules, formData, refForm, validate } = formValidate(refCaptcha)
 
   const handleForget = async () => {
     if (!refCaptcha.value) {
       throw Error('没有拿到验证码信息')
     }
-    await validate(refCaptcha.value.captchaId, refCaptcha.value.captchaText)
+    await validate()
     const res = await forget(toRaw(formData))
     ElMessage.success(res.msg)
   }

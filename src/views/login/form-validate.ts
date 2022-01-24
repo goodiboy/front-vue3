@@ -1,9 +1,10 @@
-import { reactive, ref } from 'vue'
+import { reactive, Ref, ref } from 'vue'
 import type { RuleItem } from 'async-validator'
 import type { LoginForm } from '@/types/login'
 import type { ElForm } from 'element-plus'
+import { CaptchaType } from '@/types/common'
 
-const formValidate = () => {
+const formValidate = (refCaptcha: Ref<CaptchaType | undefined>) => {
   const refForm = ref<InstanceType<typeof ElForm>>()
   const formData = reactive<LoginForm>({} as LoginForm)
 
@@ -22,7 +23,6 @@ const formValidate = () => {
 
   // 验证密码是否一致
   const validatePass2 = (rule: RuleItem, value: string | undefined, callback: any) => {
-    console.log(formData)
     if (!value?.trim()) {
       callback(new Error('请再次输入密码'))
     } else if (value !== formData.password) {
@@ -34,10 +34,9 @@ const formValidate = () => {
 
   // 校验验证码是否正确
   const validatorCaptcha = (rule: RuleItem, value: string | undefined, callback: any) => {
-    console.log(value, formData)
     if (!value?.trim()) {
       callback(new Error('请输入验证码'))
-    } else if (value?.trim() !== formData.captchaText) {
+    } else if (value?.trim() !== refCaptcha.value?.captchaText) {
       callback(new Error('验证码不正确'))
     } else {
       callback()
@@ -54,23 +53,15 @@ const formValidate = () => {
   }
 
   // 表单验证
-  const validate = async (captchaId?: string, captchaText?: string) => {
-    if (!captchaId || !captchaText) {
+  const validate = async () => {
+    if (!refCaptcha.value) {
       throw Error('没有拿到验证码信息')
     }
-    console.log(formData)
-    formData.captchaText = captchaText
-    formData.captchaId = captchaId
-
-    return refForm.value
-      ?.validate()
-      ?.catch((err) => {
-        ElMessage.error('表单填写错误')
-        throw err
-      })
-      .finally(() => {
-        delete formData.captchaText // 表单验证完之后删除这个校验属性，不传到后端
-      })
+    formData.captchaId = refCaptcha.value?.captchaId
+    return refForm.value?.validate()?.catch((err) => {
+      ElMessage.error('表单填写错误')
+      throw err
+    })
   }
 
   return {
