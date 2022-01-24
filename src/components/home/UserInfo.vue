@@ -2,7 +2,6 @@
   import { useStore } from '@/store'
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
-  import { headerStyle } from '@/assets/theme'
   import { useStorage } from '@/utils/storage/storage'
 
   const storage = useStorage()
@@ -35,7 +34,7 @@
       </el-sub-menu>
     </el-menu>
 
-    <el-button v-else type="text" style="color: #fff" @click="router.push({ name: 'Login' })">
+    <el-button v-else type="text" style="color: #333" @click="router.push({ name: 'Login' })">
       登录 / 注册
     </el-button>
   </div>
@@ -52,12 +51,13 @@
   .el-menu {
     justify-content: flex-end;
     width: 150px;
-    background: v-bind('headerStyle.bgColor');
 
     :deep(.el-sub-menu__title) {
+      height: 50px;
       padding: 0;
+      line-height: 50px;
       background-color: inherit; // 不使用el-menu的属性配置，是为了统一使用全局的颜色，方便更改
-      border-bottom: 0;
+      border-bottom: 0 !important;
 
       &:hover {
         background-color: inherit;
@@ -65,7 +65,7 @@
 
       .el-sub-menu__icon-arrow {
         font-size: 14px;
-        color: #fff;
+        color: #333;
       }
     }
   }
@@ -86,7 +86,7 @@
       max-width: 100px;
       margin-left: 10px;
       overflow: hidden;
-      color: #fff;
+      color: #333;
       text-overflow: ellipsis;
       white-space: nowrap;
     }

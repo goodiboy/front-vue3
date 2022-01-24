@@ -4,17 +4,11 @@ export default [
   {
     path: '/login',
     name: 'Login',
-    meta: {
-      disableHeader: true
-    },
     component: () => import('@/views/login/Login.vue')
   },
   {
     path: '/register',
     name: 'Register',
-    meta: {
-      disableHeader: true
-    },
     component: () => import('@/views/login/Register.vue')
   },
   {
