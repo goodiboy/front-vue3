@@ -1,4 +1,7 @@
 <script setup lang="ts">
+  // 如果您使用 unplugin-element-plus 并且只使用组件 API，您需要手动导入样式。
+  import 'element-plus/es/components/form/style/css' // auto-import不会自动引入组件的css
+
   // 初始化用表单对象
   import { reactive, ref } from 'vue'
   import { UserSelectForm, UserState } from '@/types/userManager'
@@ -38,7 +41,7 @@
 </script>
 <template>
   <div class="query-form">
-    <el-form ref="refForm" :inline="true" :model="user">
+    <el-form ref="refForm" inline :model="user">
       <el-form-item label="用户ID" prop="userId">
         <el-input v-model="user.userId" placeholder="请输入用户ID" />
       </el-form-item>
