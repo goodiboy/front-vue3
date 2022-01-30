@@ -33,7 +33,7 @@
               <span>系统管理</span>
             </template>
             <!--el-menu-item子菜单  -->
-            <el-menu-item index="1-1">用户管理 </el-menu-item>
+            <el-menu-item index="/user">用户管理 </el-menu-item>
             <el-menu-item index="1-2"> 菜单管理 </el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="2">
@@ -56,9 +56,7 @@
           <user-info />
         </div>
         <div class="wrapper">
-          <div class="main-page">
-            <router-view></router-view>
-          </div>
+          <router-view></router-view>
         </div>
       </div>
     </div>
@@ -138,11 +136,6 @@
         height: calc(100vh - 50px);
         padding: 20px;
         background: #eef0f3;
-
-        .main-page {
-          height: 100%;
-          background: #fff;
-        }
       }
     }
   }
