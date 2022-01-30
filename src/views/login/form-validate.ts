@@ -1,28 +1,39 @@
 import { reactive, Ref, ref } from 'vue'
-import type { RuleItem } from 'async-validator'
 import type { LoginForm } from '@/types/login'
 import type { ElForm } from 'element-plus'
 import { CaptchaType } from '@/types/common'
+import { FormItemRule } from 'element-plus/es/components/form/src/form.type'
+import type { InternalRuleItem, Value } from 'async-validator/dist-types/interface'
 
 const formValidate = (refCaptcha: Ref<CaptchaType | undefined>) => {
   const refForm = ref<InstanceType<typeof ElForm>>()
   const formData = reactive<LoginForm>({} as LoginForm)
 
   // 验证密码是否一致
-  const validatePass = (rule: RuleItem, value: string | undefined, callback: any) => {
+  const validatePass = (
+    rule: InternalRuleItem,
+    value: Value,
+    callback: (error?: string | Error) => void
+  ) => {
     if (!refForm.value) return
     if (!value?.trim()) {
       callback(new Error('请输入密码'))
     } else {
       if (formData.password2 !== '') {
-        refForm.value.validateField('password2', callback())
+        refForm.value.validateField('password2', () => {
+          /*验证后的函数回调*/
+        })
       }
       callback()
     }
   }
 
   // 验证密码是否一致
-  const validatePass2 = (rule: RuleItem, value: string | undefined, callback: any) => {
+  const validatePass2 = (
+    rule: InternalRuleItem,
+    value: Value,
+    callback: (error?: string | Error) => void
+  ) => {
     if (!value?.trim()) {
       callback(new Error('请再次输入密码'))
     } else if (value !== formData.password) {
@@ -33,7 +44,11 @@ const formValidate = (refCaptcha: Ref<CaptchaType | undefined>) => {
   }
 
   // 校验验证码是否正确
-  const validatorCaptcha = (rule: RuleItem, value: string | undefined, callback: any) => {
+  const validatorCaptcha = (
+    rule: InternalRuleItem,
+    value: Value,
+    callback: (error?: string | Error) => void
+  ) => {
     if (!value?.trim()) {
       callback(new Error('请输入验证码'))
     } else if (value?.trim() !== refCaptcha.value?.captchaText) {
@@ -44,7 +59,7 @@ const formValidate = (refCaptcha: Ref<CaptchaType | undefined>) => {
   }
 
   // 表单规则
-  const rules = {
+  const rules: { [key: string]: FormItemRule[] } = {
     username: [{ type: 'email', required: true, trigger: 'blur', message: '请输入邮箱用户名' }],
     nickname: [{ required: true, trigger: 'blur', message: '请输入昵称' }],
     captcha: [{ validator: validatorCaptcha, required: true, trigger: 'blur' }],
