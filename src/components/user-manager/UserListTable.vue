@@ -1,0 +1,126 @@
+<script setup lang="ts">
+  import { onMounted, ref } from 'vue'
+  import { getUserList } from '@/api/users'
+  import { Role, UserState } from '@/types/userInfo'
+  import type { UserInfo } from '@/types/userInfo'
+
+  // 定义动态表格-格式
+  const columns = [
+    {
+      type: 'selection',
+      prop: 'selection',
+      width: 55
+    },
+    {
+      label: '用户ID',
+      prop: 'userId'
+    },
+    {
+      label: '用户名',
+      prop: 'userName'
+    },
+    {
+      label: '用户邮箱',
+      prop: 'userEmail'
+    },
+    {
+      label: '用户角色',
+      prop: 'role',
+      formatter(row: UserInfo, column: number, value: Role) {
+        return {
+          0: '管理员',
+          1: '普通用户'
+        }[value]
+      }
+    },
+    {
+      label: '用户状态',
+      prop: 'state',
+      formatter(row: UserInfo, column: number, value: UserState) {
+        return {
+          1: '在职',
+          2: '离职',
+          3: '试用期'
+        }[value]
+      }
+    },
+    {
+      label: '注册时间',
+      prop: 'createTime'
+    },
+    {
+      label: '最后登录时间',
+      prop: 'lastLoginTime'
+    }
+  ]
+
+  const userList = ref<UserInfo[]>()
+
+  onMounted(async () => {
+    const res = await getUserList({ state: 0 })
+    userList.value = res.data.list
+  })
+
+  const handleCrate = () => {
+    //todo
+  }
+  const handlePatchDel = () => {
+    //todo
+  }
+  const handleSelectionChange = () => {
+    //todo
+  }
+  const handleEdit = (a: any) => {
+    //todo
+  }
+  const handleDel = (a: any) => {
+    //todo
+  }
+</script>
+<template>
+  <div class="base-table">
+    <div class="action">
+      <el-button type="primary" @click="handleCrate">新增</el-button>
+      <el-button type="danger" @click="handlePatchDel">批量删除</el-button>
+    </div>
+    <el-table :data="userList" @selection-change="handleSelectionChange">
+      <el-table-column v-for="item in columns" :key="item.prop" v-bind="item"> </el-table-column>
+      <el-table-column fixed="right" label="操作" width="150">
+        <template #default="scope">
+          <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
+          <el-button type="danger" size="mini" @click="handleDel(scope.row)">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <!-- 分页功能 -->
+    <!--<el-pagination-->
+    <!--  class="pagination"-->
+    <!--  background-->
+    <!--  layout="prev, pager, next"-->
+    <!--  :total="pager.total"-->
+    <!--  :page-size="pager.pageSize"-->
+    <!--  @current-change="handleCurrentChange"-->
+    <!--&gt;-->
+    <!--</el-pagination>-->
+  </div>
+</template>
+<style scoped lang="scss">
+  .base-table {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 5px;
+
+    .action {
+      padding: 20px;
+      background: #fff;
+      border-bottom: 1px solid #ece8e8;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .pagination {
+      padding: 10px;
+      text-align: right;
+    }
+  }
+</style>

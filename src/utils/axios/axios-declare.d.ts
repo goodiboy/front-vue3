@@ -1,12 +1,7 @@
 //eslint-disable-next-line
 import { AxiosRequestConfig, AxiosInstance } from 'axios'
 
-// 数据返回类型
-interface ResponseDataType<T = any> {
-  data: T
-  msg: string
-  code: number
-}
+import type { ResponseDataType } from '@/types/common'
 
 declare module 'axios' {
   interface AxiosRequestConfig {

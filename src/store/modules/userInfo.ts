@@ -1,10 +1,10 @@
 import { Module } from 'vuex'
-import type { UserInfo } from '@/types/userInfo'
+import type { Userinfo } from '@/types/userinfo'
 import { RootState } from '@/store'
 
 export interface UserInfoState {
   token?: string
-  userInfo?: UserInfo
+  userInfo?: Userinfo
 }
 
 export const userInfoModule: Module<UserInfoState, RootState> = {

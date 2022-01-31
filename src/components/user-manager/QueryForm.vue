@@ -4,18 +4,18 @@
 
   // 初始化用表单对象
   import { reactive, ref } from 'vue'
-  import { UserSelectForm, UserState } from '@/types/userManager'
   import { ElForm } from 'element-plus'
+  import { UserQueryForm, UserState } from '@/types/userInfo'
 
-  const user = reactive<UserSelectForm>({
-    state: UserState.all
+  const user = reactive<UserQueryForm>({
+    state: 0
   })
 
   const refForm = ref<InstanceType<typeof ElForm>>()
 
   const stateList = [
     {
-      value: UserState.all,
+      value: 0,
       label: '所有'
     },
     {
