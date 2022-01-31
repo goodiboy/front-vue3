@@ -7,7 +7,7 @@ export default [
     component: () => import('@/views/home/Home.vue'),
     children: [
       {
-        name: 'user',
+        name: 'UserManager',
         path: 'user',
         meta: {
           title: '用户管理'
