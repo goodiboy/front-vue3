@@ -1,8 +1,9 @@
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue'
+  import { onMounted, reactive, ref } from 'vue'
   import { getUserList } from '@/api/users'
   import { Role, UserState } from '@/types/userInfo'
   import type { UserInfo } from '@/types/userInfo'
+  import type { PageType } from '@/types/common'
 
   // 定义动态表格-格式
   const columns = [
@@ -55,10 +56,21 @@
   ]
 
   const userList = ref<UserInfo[]>()
+  //初始化用户分页对象
+  const pager = reactive<PageType>({
+    pageNum: 1,
+    pageSize: 10,
+    total: 0
+  })
 
-  onMounted(async () => {
-    const res = await getUserList({ state: 0 })
+  const getListData = async () => {
+    const res = await getUserList({ state: 0, ...pager })
     userList.value = res.data.list
+    pager.total = res.data.page.total
+  }
+
+  onMounted(() => {
+    getListData()
   })
 
   const handleCrate = () => {
@@ -75,6 +87,10 @@
   }
   const handleDel = (a: any) => {
     //todo
+  }
+  const handleCurrentChange = (page: number) => {
+    pager.pageNum = page
+    getListData()
   }
 </script>
 <template>
@@ -93,15 +109,15 @@
       </el-table-column>
     </el-table>
     <!-- 分页功能 -->
-    <!--<el-pagination-->
-    <!--  class="pagination"-->
-    <!--  background-->
-    <!--  layout="prev, pager, next"-->
-    <!--  :total="pager.total"-->
-    <!--  :page-size="pager.pageSize"-->
-    <!--  @current-change="handleCurrentChange"-->
-    <!--&gt;-->
-    <!--</el-pagination>-->
+    <el-pagination
+      class="pagination"
+      background
+      layout="prev, pager, next"
+      :total="pager.total"
+      :page-size="pager.pageSize"
+      @current-change="handleCurrentChange"
+    >
+    </el-pagination>
   </div>
 </template>
 <style scoped lang="scss">

@@ -5,14 +5,16 @@ export interface ResponseDataType<T = any> {
   code: number
 }
 
+export interface PageType {
+  pageNum: number
+  pageSize: number
+  total: number
+}
+
 // 分页数据类型
 export interface ListData<T = any> {
   list: T[]
-  page: {
-    pageNum: number
-    pageSize: number
-    total: number
-  }
+  page: PageType
 }
 // 验证码类型
 export interface CaptchaType {

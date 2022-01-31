@@ -9,6 +9,11 @@ export enum Role {
   ordinary // 普通用户
 }
 
+export enum Sex {
+  man,
+  woman
+}
+
 // 用户信息
 export interface UserInfo {
   username: string
@@ -17,7 +22,7 @@ export interface UserInfo {
   created: string
   update: string
   mobile: string
-  sex: number
+  sex: Sex
   deptId: string[]
   job: string
   state: UserState
