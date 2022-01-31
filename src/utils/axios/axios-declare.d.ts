@@ -10,9 +10,8 @@ interface ResponseDataType<T = any> {
 
 declare module 'axios' {
   interface AxiosRequestConfig {
-    custom?: {
-      disableMsg: boolean
-    }
+    disableMsg?: boolean
+    mock?: boolean
   }
 
   // prettier-ignore

@@ -8,7 +8,9 @@ declare module '*.vue' {
 }
 
 interface ImportMetaEnv extends Readonly<Record<string, string | boolean | undefined>> {
-  readonly VITE_BASE_REQUIRE_URL: string | undefined
+  readonly VITE_BASE_URL: string
+  readonly VITE_MOCK: string
+  readonly VITE_MOCK_URL: string
   // 更多环境变量...
 }
 

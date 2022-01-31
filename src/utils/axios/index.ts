@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 const AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_REQUIRE_URL,
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
   },
@@ -10,6 +9,20 @@ const AxiosInstance = axios.create({
 
 AxiosInstance.interceptors.request.use(
   (config) => {
+    let isMock = import.meta.env.VITE_MOCK === 'true' // 默认使用全局的mock
+    if (config.mock != undefined) {
+      // 如果接口配置了单独的mock，使用接口的单独配置
+      isMock = config.mock
+    }
+    let baseURL: string | undefined
+    if (import.meta.env.PROD) {
+      baseURL = import.meta.env.VITE_BASE_URL // 生产环境下，不使用mock数据
+    } else {
+      baseURL = isMock ? import.meta.env.VITE_MOCK_URL : import.meta.env.VITE_BASE_URL
+    }
+
+    config.baseURL = baseURL
+
     return config
   },
   (error) => {
@@ -22,7 +35,7 @@ AxiosInstance.interceptors.response.use(
     if (response.data.code === 200) {
       return Promise.resolve(response.data)
     } else {
-      if (!response.config.custom?.disableMsg) {
+      if (!response.config.disableMsg) {
         ElMessage.error(response.data.msg)
       }
       return Promise.reject(response)
