@@ -25,8 +25,7 @@ module.exports = {
     // 关闭函数必须要有返回类型，直接使用ts自带的类型推导
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     // 允许使用any，但尽量不要使用
-    '@typescript-eslint/no-explicit-any': 'off',
-    'vue/no-setup-props-destructure': 'off' // 从 `<script setup>` 的根范围内的 `props` 获取值将导致该值失去反应性,似乎和defineProps冲突，暂时关闭
+    '@typescript-eslint/no-explicit-any': 'off'
   },
   parserOptions: {
     parser: '@typescript-eslint/parser',

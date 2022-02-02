@@ -3,7 +3,7 @@
   import 'element-plus/es/components/form/style/css' // auto-import不会自动引入组件的css
 
   // 初始化用表单对象
-  import { ref, defineEmits } from 'vue'
+  import { ref, defineEmits, toRefs } from 'vue'
   import { ElForm } from 'element-plus'
   import { UserQueryForm, UserState } from '@/types/userInfo'
 
@@ -13,7 +13,7 @@
     (e: 'query'): void
   }>()
 
-  const user = props.modelValue
+  const { modelValue: user } = toRefs(props)
 
   const refForm = ref<InstanceType<typeof ElForm>>()
 
