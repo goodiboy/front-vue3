@@ -3,12 +3,12 @@
   import 'element-plus/es/components/form/style/css' // auto-import不会自动引入组件的css
 
   // 初始化用表单对象
-  import { ref, defineEmits, toRefs } from 'vue'
+  import { ref, defineEmits } from 'vue'
   import { ElForm } from 'element-plus'
   import { UserQueryForm, UserState } from '@/types/userInfo'
 
   // const { modelValue: user } = defineProps<{ modelValue: UserQueryForm }>() // 无法使用别名会报错
-  const props = toRefs(defineProps<{ modelValue: UserQueryForm }>())
+  const props = defineProps<{ modelValue: UserQueryForm }>()
   const emit = defineEmits<{
     (e: 'query'): void
   }>()
