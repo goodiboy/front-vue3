@@ -3,13 +3,17 @@
   import 'element-plus/es/components/form/style/css' // auto-import不会自动引入组件的css
 
   // 初始化用表单对象
-  import { reactive, ref } from 'vue'
+  import { ref, defineEmits, toRefs } from 'vue'
   import { ElForm } from 'element-plus'
   import { UserQueryForm, UserState } from '@/types/userInfo'
 
-  const user = reactive<UserQueryForm>({
-    state: 0
-  })
+  // const { modelValue: user } = defineProps<{ modelValue: UserQueryForm }>() // 无法使用别名会报错
+  const props = toRefs(defineProps<{ modelValue: UserQueryForm }>())
+  const emit = defineEmits<{
+    (e: 'query'): void
+  }>()
+
+  const user = props.modelValue
 
   const refForm = ref<InstanceType<typeof ElForm>>()
 
@@ -36,7 +40,7 @@
     refForm.value?.resetFields()
   }
   const handleQuery = () => {
-    // todo
+    emit('query')
   }
 </script>
 <template>
