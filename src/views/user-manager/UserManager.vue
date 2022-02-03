@@ -18,7 +18,7 @@
     <!-- 搜索模块 -->
     <query-form v-model="user" @query="handleQuery" />
     <!-- 用户列表模块 -->
-    <user-list-table />
+    <user-list-table :user="user" />
     <!-- 用户弹窗 -->
     <user-dialog />
   </div>

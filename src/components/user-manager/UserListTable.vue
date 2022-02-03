@@ -4,6 +4,7 @@
   import { Role, UserState } from '@/types/userInfo'
   import type { UserInfo } from '@/types/userInfo'
   import type { PageType } from '@/types/common'
+  import dayjs from 'dayjs'
 
   // 定义动态表格-格式
   const columns = [
@@ -47,11 +48,17 @@
     },
     {
       label: '注册时间',
-      prop: 'createTime'
+      prop: 'createTime',
+      formatter(row: UserInfo, column: number, value: string): string {
+        return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+      }
     },
     {
       label: '最后登录时间',
-      prop: 'lastLoginTime'
+      prop: 'lastLoginTime',
+      formatter(row: UserInfo, column: number, value: string): string {
+        return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+      }
     }
   ]
 
@@ -135,8 +142,8 @@
     }
 
     .pagination {
+      justify-content: flex-end;
       padding: 10px;
-      text-align: right;
     }
   }
 </style>

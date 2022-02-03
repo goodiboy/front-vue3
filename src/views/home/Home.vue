@@ -135,6 +135,7 @@
         //100vh 自动计算高度
         height: calc(100vh - 50px);
         padding: 20px;
+        overflow-y: scroll;
         background: #eef0f3;
       }
     }
