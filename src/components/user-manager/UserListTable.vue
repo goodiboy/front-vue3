@@ -103,8 +103,8 @@
       <el-table-column v-for="item in columns" :key="item.prop" v-bind="item"> </el-table-column>
       <el-table-column fixed="right" label="操作" width="150">
         <template #default="scope">
-          <el-button size="mini" @click="handleEdit(scope.row)">编辑</el-button>
-          <el-button type="danger" size="mini" @click="handleDel(scope.row)">删除</el-button>
+          <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
+          <el-button type="danger" size="small" @click="handleDel(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
