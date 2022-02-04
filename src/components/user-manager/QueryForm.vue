@@ -2,7 +2,7 @@
   // 如果您使用 unplugin-element-plus 并且只使用组件 API，您需要手动导入样式。
   import 'element-plus/es/components/form/style/css' // auto-import不会自动引入组件的css
   // 初始化用表单对象
-  import { ref, defineEmits, toRefs, defineProps } from 'vue'
+  import { ref, toRefs } from 'vue'
   import { ElForm } from 'element-plus'
   import { UserQueryForm, UserState } from '@/types/userInfo'
 
