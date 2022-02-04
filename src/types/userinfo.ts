@@ -1,3 +1,5 @@
+import type { PageType } from '@/types/common'
+
 export enum UserState {
   working = 1, // 在职
   quit, // 离职
@@ -37,3 +39,5 @@ export interface UserQueryForm {
   userName?: string
   state: UserState | number // 有一个选项是0代表全部
 }
+
+export type UserListParams = UserQueryForm & PageType

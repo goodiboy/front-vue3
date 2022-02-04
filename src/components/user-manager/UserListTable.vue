@@ -1,10 +1,11 @@
 <script setup lang="ts">
   import { onMounted, reactive, ref } from 'vue'
   import { getUserList } from '@/api/users'
-  import { Role, UserState } from '@/types/userInfo'
-  import type { UserInfo } from '@/types/userInfo'
+  import { UserListParams, UserState } from '@/types/userInfo'
+  import type { UserInfo, Role, UserQueryForm } from '@/types/userInfo'
   import type { PageType } from '@/types/common'
   import dayjs from 'dayjs'
+  import { formatterParams } from '@/utils/utils'
 
   // 定义动态表格-格式
   const columns = [
@@ -70,8 +71,16 @@
     total: 0
   })
 
+  const props = defineProps<{ user: UserQueryForm }>()
   const getListData = async () => {
-    const res = await getUserList({ state: 0, ...pager })
+    const params = formatterParams<UserListParams>(
+      {
+        ...props.user,
+        ...pager
+      },
+      ['total']
+    )
+    const res = await getUserList(params)
     userList.value = res.data.list
     pager.total = res.data.page.total
   }
@@ -99,6 +108,10 @@
     pager.pageNum = page
     getListData()
   }
+
+  defineExpose({
+    getListData
+  })
 </script>
 <template>
   <div class="base-table">
