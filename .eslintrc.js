@@ -34,6 +34,9 @@ module.exports = {
   // 声明全局属性，因为setup有些全局宏属性，eslint没法识别，需要在这里设置为全局属性
   globals: {
     defineProps: true,
+    withDefaults: true,
+    defineEmits: true,
+    defineExpose: true,
     ElMessage: true
   }
 }
