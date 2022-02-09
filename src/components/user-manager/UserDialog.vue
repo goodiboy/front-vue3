@@ -1,6 +1,6 @@
 <script setup lang="ts">
   // 弹窗显示对象
-  import { nextTick, reactive, ref, toRefs, watch, watchEffect } from 'vue'
+  import { nextTick, reactive, ref, toRefs, watch } from 'vue'
   import type { SystemRole, UserInfo } from '@/types/userinfo'
   import { ElForm } from 'element-plus'
   import { getDeptList, getSystemRoleList } from '@/api/users'
@@ -69,7 +69,6 @@
 
   // 这个dialogData本来就是ref，上面解构的时候加多了一层toRefs，这里watch需要.value
   const unWatchFirstOpen = watch(dialogData.value, (newVal) => {
-    console.log(newVal)
     if (newVal.show) {
       getSystemRoles()
       getDept()
@@ -77,14 +76,12 @@
     }
   })
 
-  watchEffect(() => {
-    if (props.dialogData.show) {
-      if (dialogData.value.row) {
-        nextTick(() => {
-          // 需要在下一帧再初始化数据，要不然elementUI的reset方法回重置到赋值后的状态（原因是渲染太快了）
-          Object.assign(userForm, dialogData.value.row)
-        })
-      }
+  watch(dialogData.value, () => {
+    if (dialogData.value.show && dialogData.value.row) {
+      nextTick(() => {
+        // 需要在下一帧再初始化数据，要不然elementUI的reset方法回重置到赋值后的状态（原因是渲染太快了）
+        Object.assign(userForm, dialogData.value.row)
+      })
     }
   })
 
