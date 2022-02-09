@@ -14,8 +14,20 @@ export const getUserList = (params: UserListParams) => {
   })
 }
 
+/**
+ * 获取系统角色列表
+ */
 export const getSystemRoleList = () => {
   return AxiosInstance.get<SystemRole[]>('/roles/allList', {
+    mock: true
+  })
+}
+
+/**
+ * 获取部门列表
+ */
+export const getDeptList = () => {
+  return AxiosInstance.get<SystemRole[]>('/dept/list', {
     mock: true
   })
 }
