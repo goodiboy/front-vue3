@@ -2,7 +2,7 @@
   import { onMounted, reactive, ref } from 'vue'
   import { getUserList } from '@/api/users'
   import { UserListParams, UserState } from '@/types/userInfo'
-  import type { UserInfo, Role, UserQueryForm } from '@/types/userInfo'
+  import type { UserInfo, UserRole, UserQueryForm } from '@/types/userInfo'
   import type { PageType } from '@/types/common'
   import dayjs from 'dayjs'
   import { formatterParams } from '@/utils/utils'
@@ -29,7 +29,7 @@
     {
       label: '用户角色',
       prop: 'role',
-      formatter(row: UserInfo, column: number, value: Role) {
+      formatter(row: UserInfo, column: number, value: UserRole) {
         return {
           0: '管理员',
           1: '普通用户'

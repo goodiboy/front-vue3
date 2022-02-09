@@ -1,8 +1,9 @@
 <script setup lang="ts">
   // 弹窗显示对象
   import { nextTick, reactive, ref, toRefs, watchEffect } from 'vue'
-  import { UserInfo } from '@/types/userinfo'
+  import type { SystemRole, UserInfo } from '@/types/userinfo'
   import { ElForm } from 'element-plus'
+  import { getSystemRoleList } from '@/api/users'
 
   // 定义表单验证规则
   const rules = reactive({
@@ -51,19 +52,30 @@
     state: 3
   } as UserInfo)
 
+  //  所有角色列表
+  const roleList = ref<SystemRole[]>([])
+  // 部门列表
+  const deptList = ref([])
+
+  const getSystemRoles = async () => {
+    const res = await getSystemRoleList()
+    roleList.value = res.data
+  }
+
   watchEffect(() => {
-    if (props.dialogData.show && props.dialogData.row) {
-      nextTick(() => {
-        // 需要在下一帧再初始化数据，要不然elementUI的reset方法回重置到赋值后的状态（原因是渲染太快了）
-        Object.assign(userForm, props.dialogData.row)
-      })
+    if (props.dialogData.show) {
+      if (dialogData.value.row) {
+        nextTick(() => {
+          // 需要在下一帧再初始化数据，要不然elementUI的reset方法回重置到赋值后的状态（原因是渲染太快了）
+          Object.assign(userForm, dialogData.value.row)
+        })
+      }
+      if (!roleList.value.length) {
+        getSystemRoles()
+      }
     }
   })
 
-  //  所有角色列表
-  const roleList = ref([])
-  // 部门列表
-  const deptList = ref([])
   // 用户弹窗关闭
   const handleClose = () => {
     emit('close')
