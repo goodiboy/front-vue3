@@ -1,17 +1,19 @@
 <script setup lang="ts">
   // 弹窗显示对象
-  import { reactive, ref } from 'vue'
+  import { nextTick, reactive, ref, toRefs, watchEffect } from 'vue'
+  import { UserInfo } from '@/types/userinfo'
+  import { ElForm } from 'element-plus'
 
   // 定义表单验证规则
   const rules = reactive({
-    userName: [
+    nickname: [
       {
         required: true,
-        message: '请输入用户名称',
+        message: '请输入用户昵称',
         trigger: 'blur'
       }
     ],
-    userEmail: [
+    username: [
       {
         required: true,
         message: '请输入用户的邮箱',
@@ -33,50 +35,65 @@
       }
     ]
   })
-  // 弹窗显示对象
-  const showModal = ref(true)
 
+  // 如果row存在即时编辑状态，不存在就是新增状态
+  const props = defineProps<{ dialogData: { show: boolean; row?: UserInfo } }>()
+  const emit = defineEmits<{
+    (e: 'close'): void
+    (e: 'submit'): void
+  }>()
+
+  const { dialogData } = toRefs(props)
+
+  const dialogForm = ref<InstanceType<typeof ElForm>>()
   // 新增用户对象
-  const userForm = reactive({
-    userName: '',
+  const userForm = reactive<UserInfo>({
     state: 3
+  } as UserInfo)
+
+  watchEffect(() => {
+    if (props.dialogData.show && props.dialogData.row) {
+      nextTick(() => {
+        // 需要在下一帧再初始化数据，要不然elementUI的reset方法回重置到赋值后的状态（原因是渲染太快了）
+        Object.assign(userForm, props.dialogData.row)
+      })
+    }
   })
 
   //  所有角色列表
   const roleList = ref([])
-  // 定义用户操作行为
-  const action = ref('create')
   // 部门列表
   const deptList = ref([])
   // 用户弹窗关闭
   const handleClose = () => {
-    showModal.value = false
+    emit('close')
   }
   // 用户提交
   const handleSubmit = () => {
-    showModal.value = false
+    // todo 提交数据
+    emit('submit')
   }
 </script>
 <template>
   <!-- 增加用户弹窗 -->
-  <el-dialog v-model="showModal" title="新增用户">
+  <el-dialog v-model="dialogData.show" title="新增用户" @close="dialogForm?.resetFields()">
     <el-form ref="dialogForm" :model="userForm" label-width="100px" :rules="rules">
-      <el-form-item label="用户名" prop="userName">
+      <el-form-item label="用户名" prop="userEmail">
         <el-input
-          v-model="userForm.userName"
-          placeholder="请输入用户名称"
-          :disabled="action === 'edit'"
-        />
-      </el-form-item>
-      <el-form-item label="用户邮箱" prop="userEmail">
-        <el-input
-          v-model="userForm.userEmail"
+          v-model="userForm.username"
           placeholder="请输入用户邮箱"
-          :disabled="action === 'edit'"
+          :disabled="!!dialogData.row"
         >
           <!-- 插槽 -->
           <template #append> qq.com</template>
         </el-input>
+      </el-form-item>
+      <el-form-item label="用户名" prop="userName">
+        <el-input
+          v-model="userForm.nickname"
+          placeholder="请输入用户名称"
+          :disabled="!!dialogData.row"
+        />
       </el-form-item>
       <el-form-item label="手机号" prop="mobile">
         <el-input v-model="userForm.mobile" placeholder="请输入手机号" />

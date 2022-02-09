@@ -85,12 +85,16 @@
     pager.total = res.data.page.total
   }
 
+  const emit = defineEmits<{
+    (e: 'openDialog', row?: UserInfo): void
+  }>()
+
   onMounted(() => {
     getListData()
   })
 
-  const handleCrate = () => {
-    //todo
+  const handleCreate = () => {
+    emit('openDialog')
   }
   const handlePatchDel = () => {
     //todo
@@ -98,8 +102,8 @@
   const handleSelectionChange = () => {
     //todo
   }
-  const handleEdit = (a: any) => {
-    //todo
+  const handleEdit = (row: UserInfo) => {
+    emit('openDialog', row)
   }
   const handleDel = (a: any) => {
     //todo
@@ -116,7 +120,7 @@
 <template>
   <div class="base-table">
     <div class="action">
-      <el-button type="primary" @click="handleCrate">新增</el-button>
+      <el-button type="primary" @click="handleCreate">新增</el-button>
       <el-button type="danger" @click="handlePatchDel">批量删除</el-button>
     </div>
     <el-table :data="userList" @selection-change="handleSelectionChange">
