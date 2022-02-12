@@ -91,8 +91,8 @@
   }
   // 用户提交
   const handleSubmit = async () => {
-    // todo 提交数据
-    if (dialogData.value.row) {
+    // 如果row不存在，即是新建，要把之前遗留的id删除掉，后端是根据是否有id进行判断是新增还是编辑
+    if (!dialogData.value.row) {
       delete userForm._id
     }
     await operateUser(userForm)
