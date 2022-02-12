@@ -5,8 +5,9 @@ import type { ResponseDataType } from '@/types/common'
 
 declare module 'axios' {
   interface AxiosRequestConfig {
-    disableMsg?: boolean
-    mock?: boolean
+    disableMsg?: boolean // 是否禁用接口成功后的自动提示
+    mock?: boolean // 是否使用mock数据
+    cacheApi?: boolean // 是否缓存接口数据
   }
 
   // prettier-ignore

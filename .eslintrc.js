@@ -24,7 +24,9 @@ module.exports = {
     // 关闭函数必须要有返回类型，直接使用ts自带的类型推导
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     // 允许使用any，但尽量不要使用
-    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/no-explicit-any': 'off',
+    // 允许使用ts-ignore指令
+    '@typescript-eslint/ban-ts-comment': 'off'
   },
   parserOptions: {
     parser: '@typescript-eslint/parser',

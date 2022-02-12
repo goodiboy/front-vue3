@@ -1,6 +1,7 @@
 import { InjectionKey } from 'vue'
 import { createStore, useStore as baseUseStore, Store } from 'vuex'
 import { userInfoModule, UserInfoState } from '@/store/modules/userInfo'
+import { cacheApiModule, CacheApiState } from '@/store/modules/cacheApi'
 
 export interface RootState {
   count: number
@@ -8,6 +9,7 @@ export interface RootState {
 
 export interface RootStateTypes extends RootState {
   userInfoModule: UserInfoState
+  cacheApiModule: CacheApiState
 }
 
 export const key: InjectionKey<Store<RootState>> = Symbol()
@@ -17,7 +19,8 @@ export const store = createStore<RootState>({
     count: 0
   },
   modules: {
-    userInfoModule
+    userInfoModule,
+    cacheApiModule
   }
 })
 

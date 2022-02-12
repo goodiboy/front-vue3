@@ -8,7 +8,6 @@ modules.forEach((item) => {
   routes = routes.concat(item.default as RouteRecordRaw[])
 })
 
-console.log(routes)
 const router = createRouter({
   routes,
   history: createWebHistory()

@@ -23,7 +23,8 @@ export const operateUser = (params: UserInfo) => {
  */
 export const getSystemRoleList = () => {
   return AxiosInstance.get<Role[]>('/roles/allList', {
-    mock: true
+    mock: true,
+    cacheApi: true
   })
 }
 
