@@ -6,8 +6,19 @@ export enum UserState {
   trial // 试用期
 }
 
+export enum RoleEnum {
+  PRODUCT = 'PRODUCT',
+  DEVELOP = 'DEVELOP',
+  JAVA = 'JAVA',
+  DEV_OPS = 'DEV_OPS',
+  OPERATE = 'OPERATE',
+  MARKET = 'MARKET',
+  MANAGER = 'MANAGER',
+  TEST = 'TEST'
+}
+
 export interface Role {
-  roleName: string
+  roleName: RoleEnum
   _id: string
 }
 

@@ -1,12 +1,12 @@
 <script setup lang="ts">
   import { onMounted, reactive, ref } from 'vue'
-  import { getUserList } from '@/api/users'
-  import { UserListParams, UserState } from '@/types/userInfo'
+  import { getSystemRoleList, getUserList } from '@/api/users'
+  import { RoleEnum, UserListParams, UserState } from '@/types/userInfo'
   import type { UserInfo, UserQueryForm } from '@/types/userInfo'
   import type { PageType } from '@/types/common'
   import dayjs from 'dayjs'
   import { formatterParams } from '@/utils/utils'
-
+  const roles = ref<Record<string, RoleEnum>>({})
   // 定义动态表格-格式
   const columns = [
     {
@@ -23,8 +23,15 @@
       prop: 'nickname'
     },
     {
+      label: '手机号',
+      prop: 'mobile'
+    },
+    {
       label: '岗位',
-      prop: 'job'
+      prop: 'job',
+      formatter(row: UserInfo, column: number, value: string) {
+        return roles.value[value]
+      }
     },
     {
       label: '用户角色',
@@ -47,6 +54,7 @@
     {
       label: '注册时间',
       prop: 'createTime',
+      width: '160',
       formatter(row: UserInfo, column: number, value: string): string {
         return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
       }
@@ -54,6 +62,7 @@
     {
       label: '最后登录时间',
       prop: 'lastLoginTime',
+      width: '160',
       formatter(row: UserInfo, column: number, value: string): string {
         return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
       }
@@ -86,8 +95,16 @@
     (e: 'openDialog', row?: UserInfo): void
   }>()
 
+  const getRoles = async () => {
+    const res = await getSystemRoleList()
+    res.data.forEach((item) => {
+      roles.value[item._id] = item.roleName
+    })
+  }
+
   onMounted(() => {
     getListData()
+    getRoles()
   })
 
   const handleCreate = () => {
