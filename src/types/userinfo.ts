@@ -18,7 +18,8 @@ export enum Sex {
 
 // 用户信息
 export interface UserInfo {
-  _id: string
+  _id?: string
+  num: number // 记录用户是第几位员工
   username: string
   password: string
   nickname: string
@@ -36,7 +37,7 @@ export interface UserInfo {
 
 // 用户查询表单
 export interface UserQueryForm {
-  _id?: string
+  nickname?: string
   username?: string
   state: UserState | number // 有一个选项是0代表全部
 }

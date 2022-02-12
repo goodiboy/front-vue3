@@ -14,6 +14,10 @@ export const getUserList = (params: UserListParams) => {
   })
 }
 
+export const operateUser = (params: UserInfo) => {
+  return AxiosInstance.post('/users/operate', params)
+}
+
 /**
  * 获取系统角色列表
  */

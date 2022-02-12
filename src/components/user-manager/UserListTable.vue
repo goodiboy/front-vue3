@@ -15,16 +15,16 @@
       width: 55
     },
     {
-      label: '用户ID',
-      prop: '_id'
-    },
-    {
       label: '用户名',
       prop: 'username'
     },
     {
       label: '昵称',
       prop: 'nickname'
+    },
+    {
+      label: '岗位',
+      prop: 'job'
     },
     {
       label: '用户角色',

@@ -3,18 +3,18 @@
   import { nextTick, reactive, ref, toRefs, watch } from 'vue'
   import type { Role, UserInfo } from '@/types/userinfo'
   import { ElForm } from 'element-plus'
-  import { getDeptList, getSystemRoleList } from '@/api/users'
+  import { getDeptList, getSystemRoleList, operateUser } from '@/api/users'
 
   // 定义表单验证规则
   const rules = reactive({
-    nickname: [
+    username: [
       {
         required: true,
-        message: '请输入用户昵称',
+        message: '请输入用户名',
         trigger: 'blur'
       }
     ],
-    username: [
+    nickname: [
       {
         required: true,
         message: '请输入昵称',
@@ -90,8 +90,12 @@
     emit('close')
   }
   // 用户提交
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // todo 提交数据
+    if (dialogData.value.row) {
+      delete userForm._id
+    }
+    await operateUser(userForm)
     emit('submit')
   }
 </script>
@@ -99,7 +103,7 @@
   <!-- 增加用户弹窗 -->
   <el-dialog v-model="dialogData.show" title="新增用户" @close="dialogForm?.resetFields()">
     <el-form ref="dialogForm" :model="userForm" label-width="100px" :rules="rules">
-      <el-form-item label="用户名" prop="nickname">
+      <el-form-item label="用户名" prop="username">
         <el-input
           v-model="userForm.username"
           placeholder="请输入用户名"
@@ -109,7 +113,7 @@
           <template #append> qq.com</template>
         </el-input>
       </el-form-item>
-      <el-form-item label="昵称" prop="username">
+      <el-form-item label="昵称" prop="nickname">
         <el-input
           v-model="userForm.nickname"
           placeholder="请输入昵称"
@@ -123,7 +127,14 @@
         <el-switch v-model="userForm.admin" />
       </el-form-item>
       <el-form-item label="岗位" prop="job">
-        <el-input v-model="userForm.job" placeholder="请输入岗位" />
+        <el-select v-model="userForm.job" placeholder="请选择用户岗位" style="width: 100%">
+          <el-option
+            v-for="item in roleList"
+            :key="item._id"
+            :value="item._id"
+            :label="item.roleName"
+          ></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="状态" prop="state">
         <el-select v-model="userForm.state">
