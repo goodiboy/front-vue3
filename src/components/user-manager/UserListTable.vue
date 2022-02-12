@@ -2,7 +2,7 @@
   import { onMounted, reactive, ref } from 'vue'
   import { getUserList } from '@/api/users'
   import { UserListParams, UserState } from '@/types/userInfo'
-  import type { UserInfo, UserRole, UserQueryForm } from '@/types/userInfo'
+  import type { UserInfo, UserQueryForm } from '@/types/userInfo'
   import type { PageType } from '@/types/common'
   import dayjs from 'dayjs'
   import { formatterParams } from '@/utils/utils'
@@ -16,24 +16,21 @@
     },
     {
       label: '用户ID',
-      prop: 'userId'
+      prop: '_id'
     },
     {
       label: '用户名',
-      prop: 'userName'
+      prop: 'username'
     },
     {
-      label: '用户邮箱',
-      prop: 'userEmail'
+      label: '昵称',
+      prop: 'nickname'
     },
     {
       label: '用户角色',
-      prop: 'role',
-      formatter(row: UserInfo, column: number, value: UserRole) {
-        return {
-          0: '管理员',
-          1: '普通用户'
-        }[value]
+      prop: 'admin',
+      formatter(row: UserInfo, column: number, value: boolean) {
+        return value ? '管理员' : '普通用户'
       }
     },
     {

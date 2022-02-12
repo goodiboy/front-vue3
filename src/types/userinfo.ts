@@ -6,12 +6,7 @@ export enum UserState {
   trial // 试用期
 }
 
-export enum UserRole {
-  admin, // 管理员
-  ordinary // 普通用户
-}
-
-export interface SystemRole {
+export interface Role {
   roleName: string
   _id: string
 }
@@ -23,6 +18,7 @@ export enum Sex {
 
 // 用户信息
 export interface UserInfo {
+  _id: string
   username: string
   password: string
   nickname: string
@@ -33,15 +29,15 @@ export interface UserInfo {
   deptId: string[]
   job: string
   state: UserState
-  userRole: UserRole
-  systemRole: SystemRole[]
+  admin: boolean // 是否管理员
+  roleList: Role[] // 岗位角色
   remark: string
 }
 
 // 用户查询表单
 export interface UserQueryForm {
-  userId?: string
-  userName?: string
+  _id?: string
+  username?: string
   state: UserState | number // 有一个选项是0代表全部
 }
 

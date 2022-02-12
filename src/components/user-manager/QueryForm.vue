@@ -45,11 +45,11 @@
 <template>
   <div class="query-form">
     <el-form ref="refForm" inline :model="user">
-      <el-form-item label="用户ID" prop="userId">
-        <el-input v-model="user.userId" placeholder="请输入用户ID" />
+      <el-form-item label="用户ID" prop="_id">
+        <el-input v-model="user._id" placeholder="请输入用户ID" />
       </el-form-item>
-      <el-form-item label="用户名称" prop="userName">
-        <el-input v-model="user.userName" placeholder="请输入用户名称" />
+      <el-form-item label="用户名称" prop="username">
+        <el-input v-model="user.username" placeholder="请输入用户名称" />
       </el-form-item>
       <el-form-item label="状态" prop="state">
         <el-select v-model="user.state">

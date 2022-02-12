@@ -1,7 +1,7 @@
 import AxiosInstance from '@/utils/axios'
 import type { UserInfo } from '@/types/userInfo'
 import type { ListData } from '@/types/common'
-import { SystemRole, UserListParams } from '@/types/userInfo'
+import { Role, UserListParams } from '@/types/userInfo'
 
 /**
  * 获取用户列表
@@ -10,7 +10,7 @@ import { SystemRole, UserListParams } from '@/types/userInfo'
 export const getUserList = (params: UserListParams) => {
   return AxiosInstance.get<ListData<UserInfo>>('/users/list', {
     params,
-    mock: true
+    mock: false
   })
 }
 
@@ -18,7 +18,7 @@ export const getUserList = (params: UserListParams) => {
  * 获取系统角色列表
  */
 export const getSystemRoleList = () => {
-  return AxiosInstance.get<SystemRole[]>('/roles/allList', {
+  return AxiosInstance.get<Role[]>('/roles/allList', {
     mock: true
   })
 }
@@ -27,7 +27,7 @@ export const getSystemRoleList = () => {
  * 获取部门列表
  */
 export const getDeptList = () => {
-  return AxiosInstance.get<SystemRole[]>('/dept/list', {
+  return AxiosInstance.get<Role[]>('/dept/list', {
     mock: true
   })
 }

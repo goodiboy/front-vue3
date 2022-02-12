@@ -1,7 +1,7 @@
 <script setup lang="ts">
   // 弹窗显示对象
   import { nextTick, reactive, ref, toRefs, watch } from 'vue'
-  import type { SystemRole, UserInfo } from '@/types/userinfo'
+  import type { Role, UserInfo } from '@/types/userinfo'
   import { ElForm } from 'element-plus'
   import { getDeptList, getSystemRoleList } from '@/api/users'
 
@@ -17,7 +17,7 @@
     username: [
       {
         required: true,
-        message: '请输入用户的邮箱',
+        message: '请输入昵称',
         trigger: 'blur'
       }
     ],
@@ -53,7 +53,7 @@
   } as UserInfo)
 
   //  所有角色列表
-  const roleList = ref<SystemRole[]>([])
+  const roleList = ref<Role[]>([])
   // 部门列表
   const deptList = ref([])
 
@@ -99,25 +99,28 @@
   <!-- 增加用户弹窗 -->
   <el-dialog v-model="dialogData.show" title="新增用户" @close="dialogForm?.resetFields()">
     <el-form ref="dialogForm" :model="userForm" label-width="100px" :rules="rules">
-      <el-form-item label="用户名" prop="userEmail">
+      <el-form-item label="用户名" prop="nickname">
         <el-input
           v-model="userForm.username"
-          placeholder="请输入用户邮箱"
+          placeholder="请输入用户名"
           :disabled="!!dialogData.row"
         >
           <!-- 插槽 -->
           <template #append> qq.com</template>
         </el-input>
       </el-form-item>
-      <el-form-item label="用户名" prop="userName">
+      <el-form-item label="昵称" prop="username">
         <el-input
           v-model="userForm.nickname"
-          placeholder="请输入用户名称"
+          placeholder="请输入昵称"
           :disabled="!!dialogData.row"
         />
       </el-form-item>
       <el-form-item label="手机号" prop="mobile">
         <el-input v-model="userForm.mobile" placeholder="请输入手机号" />
+      </el-form-item>
+      <el-form-item label="系统管理员" prop="mobile">
+        <el-switch v-model="userForm.admin" />
       </el-form-item>
       <el-form-item label="岗位" prop="job">
         <el-input v-model="userForm.job" placeholder="请输入岗位" />
