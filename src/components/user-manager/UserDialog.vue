@@ -34,7 +34,7 @@
   //  所有角色列表
   const roleList = ref<Role[]>([])
   // 部门列表
-  const deptList = ref([])
+  const deptList = ref()
 
   const getSystemRoles = async () => {
     const res = await getSystemRoleList()
@@ -43,6 +43,7 @@
 
   const getDept = async () => {
     const res = await getDeptList()
+    deptList.value = res.data
     console.log(res)
   }
 
