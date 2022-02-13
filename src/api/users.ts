@@ -21,6 +21,10 @@ export const operateUser = (params: UserInfo) => {
   return AxiosInstance.post('/users/operate', params)
 }
 
+/**
+ * 删除用户（转换为离职状态）
+ * @param _ids 用户的id数组
+ */
 export const deleteUser = (_ids: string[]) => {
   return AxiosInstance.delete('/users/delete', {
     params: {
