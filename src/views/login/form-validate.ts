@@ -1,8 +1,8 @@
 import { reactive, Ref, ref } from 'vue'
 import type { LoginForm } from '@/types/login'
 import type { ElForm } from 'element-plus'
-import { CaptchaType } from '@/types/common'
-import { FormItemRule } from 'element-plus/es/components/form/src/form.type'
+import type { CaptchaType } from '@/types/common'
+import type { FormItemRule } from 'element-plus/es/components/form/src/form.type'
 import type { InternalRuleItem, Value } from 'async-validator/dist-types/interface'
 
 const formValidate = (refCaptcha: Ref<CaptchaType | undefined>) => {

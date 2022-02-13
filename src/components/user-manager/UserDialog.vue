@@ -7,34 +7,13 @@
 
   // 定义表单验证规则
   const rules = reactive({
-    username: [
-      {
-        required: true,
-        message: '请输入用户名',
-        trigger: 'blur'
-      }
-    ],
-    nickname: [
-      {
-        required: true,
-        message: '请输入昵称',
-        trigger: 'blur'
-      }
-    ],
+    username: [{ type: 'email', required: true, trigger: 'blur', message: '请输入邮箱用户名' }],
+    nickname: [{ required: true, message: '请输入昵称', trigger: 'blur' }],
     mobile: [
-      {
-        pattern: /1\d{10}/,
-        message: '请输入正确的手机号格式',
-        trigger: 'blur'
-      }
+      { required: true, pattern: /1\d{10}/, message: '请输入正确的手机号格式', trigger: 'blur' }
     ],
-    deptId: [
-      {
-        required: true,
-        message: '请选择所属部门',
-        trigger: 'blur'
-      }
-    ]
+    roleList: [{ required: true, message: '请选择用户系统角色', trigger: 'blur' }],
+    deptId: [{ required: true, message: '请选择所属部门', trigger: 'blur' }]
   })
 
   // 如果row存在即时编辑状态，不存在就是新增状态
@@ -109,8 +88,6 @@
           placeholder="请输入用户名"
           :disabled="!!dialogData.row"
         >
-          <!-- 插槽 -->
-          <template #append> qq.com</template>
         </el-input>
       </el-form-item>
       <el-form-item label="昵称" prop="nickname">
@@ -123,10 +100,10 @@
       <el-form-item label="手机号" prop="mobile">
         <el-input v-model="userForm.mobile" placeholder="请输入手机号" />
       </el-form-item>
-      <el-form-item label="系统管理员" prop="mobile">
+      <el-form-item label="系统管理员" required prop="mobile">
         <el-switch v-model="userForm.admin" />
       </el-form-item>
-      <el-form-item label="岗位" prop="job">
+      <el-form-item label="岗位" required prop="job">
         <el-select v-model="userForm.job" placeholder="请选择用户岗位" style="width: 100%">
           <el-option
             v-for="item in roleList"
@@ -136,7 +113,7 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="状态" prop="state">
+      <el-form-item label="状态" required prop="state">
         <el-select v-model="userForm.state">
           <el-option :value="1" label="在职"></el-option>
           <el-option :value="2" label="离职"></el-option>
