@@ -1,6 +1,7 @@
-import axios from 'axios'
+import axios, { Method } from 'axios'
 import { store } from '@/store'
 import { toRaw } from 'vue'
+import qs from 'qs'
 
 const AxiosInstance = axios.create({
   headers: {
@@ -36,6 +37,15 @@ AxiosInstance.interceptors.request.use(
     }
 
     config.baseURL = baseURL
+
+    const requestMethod = config.method?.toLocaleLowerCase() as Method
+    // 对一下几个方法的参数进行序列号，要不然传不了对象和数据参数 get，delete，head ，暂时只需用到delete
+    if (requestMethod === 'delete') {
+      config.paramsSerializer = (params) => {
+        console.log(params)
+        return qs.stringify(params, { indices: false })
+      }
+    }
 
     return config
   },

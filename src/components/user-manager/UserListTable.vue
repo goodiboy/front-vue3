@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { onMounted, reactive, ref } from 'vue'
-  import { getSystemRoleList, getUserList } from '@/api/users'
+  import { deleteUser, getSystemRoleList, getUserList } from '@/api/users'
   import { RoleEnum, UserListParams, UserState } from '@/types/userInfo'
   import type { UserInfo, UserQueryForm } from '@/types/userInfo'
   import type { PageType } from '@/types/common'
@@ -69,7 +69,10 @@
     }
   ]
 
+  // 用户列表数据
   const userList = ref<UserInfo[]>()
+  // 选择中用户列表的对象
+  const checkedUserIds = ref<string[]>([])
   //初始化用户分页对象
   const pager = reactive<PageType>({
     pageNum: 1,
@@ -101,6 +104,10 @@
       roles.value[item._id] = item.roleName
     })
   }
+  const delUser = async (_ids: string[]) => {
+    await deleteUser(_ids)
+    getListData()
+  }
 
   onMounted(() => {
     getListData()
@@ -111,16 +118,16 @@
     emit('openDialog')
   }
   const handlePatchDel = () => {
-    //todo
+    delUser(checkedUserIds.value)
   }
-  const handleSelectionChange = () => {
-    //todo
+  const handleSelectionChange = (list: UserInfo[]) => {
+    checkedUserIds.value = list.map((item) => item._id as string)
   }
   const handleEdit = (row: UserInfo) => {
     emit('openDialog', row)
   }
-  const handleDel = (a: any) => {
-    //todo
+  const handleDel = (row: UserInfo) => {
+    delUser([row._id as string])
   }
   const handleCurrentChange = (page: number) => {
     pager.pageNum = page
@@ -142,7 +149,13 @@
       <el-table-column fixed="right" label="操作" width="150">
         <template #default="scope">
           <el-button size="small" @click="handleEdit(scope.row)">编辑</el-button>
-          <el-button type="danger" size="small" @click="handleDel(scope.row)">删除</el-button>
+          <el-button
+            type="danger"
+            size="small"
+            :disabled="scope.row.state === UserState.quit"
+            @click="handleDel(scope.row)"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>

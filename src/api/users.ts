@@ -2,7 +2,6 @@ import AxiosInstance from '@/utils/axios'
 import type { UserInfo } from '@/types/userInfo'
 import type { ListData } from '@/types/common'
 import { Role, UserListParams } from '@/types/userInfo'
-
 /**
  * 获取用户列表
  * @param params
@@ -14,8 +13,20 @@ export const getUserList = (params: UserListParams) => {
   })
 }
 
+/**
+ * 编辑或者添加用户
+ * @param params
+ */
 export const operateUser = (params: UserInfo) => {
   return AxiosInstance.post('/users/operate', params)
+}
+
+export const deleteUser = (_ids: string[]) => {
+  return AxiosInstance.delete('/users/delete', {
+    params: {
+      _ids
+    }
+  })
 }
 
 /**

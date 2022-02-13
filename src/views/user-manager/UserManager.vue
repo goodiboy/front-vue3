@@ -9,7 +9,7 @@
   const userTable = ref<{ getListData: () => void }>()
 
   const user = reactive<UserQueryForm>({
-    state: 0
+    state: 1
   })
 
   const dialogData = reactive<{ show: boolean; row?: UserInfo }>({
@@ -17,12 +17,10 @@
   })
 
   const handleQuery = () => {
-    console.log(1)
     userTable.value?.getListData()
   }
 
   const handleOpenDialog = (row?: UserInfo) => {
-    console.log(row)
     dialogData.show = true
     dialogData.row = row
   }
