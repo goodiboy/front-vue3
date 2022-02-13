@@ -2,7 +2,9 @@ import axios, { Method } from 'axios'
 import { store } from '@/store'
 import { toRaw } from 'vue'
 import qs from 'qs'
+import { useStorage } from '@/utils/storage/storage'
 
+const storage = useStorage()
 const AxiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
@@ -12,6 +14,12 @@ const AxiosInstance = axios.create({
 
 AxiosInstance.interceptors.request.use(
   (config) => {
+    const userInfo = storage.getItem('userInfo')
+    if (userInfo) {
+      const { token } = userInfo
+      config.headers!.Authorization = 'Bearer ' + token
+    }
+
     //@ts-ignore  这个cacheApiModule类型是在modules里面的，ts类型无法适配，暂时限于ignore
     const cacheData = store.state.cacheApiModule[config.url]
     if (cacheData) {
