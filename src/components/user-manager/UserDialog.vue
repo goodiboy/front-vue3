@@ -10,7 +10,7 @@
     username: [{ type: 'email', required: true, trigger: 'blur', message: '请输入邮箱用户名' }],
     nickname: [{ required: true, message: '请输入昵称', trigger: 'blur' }],
     mobile: [
-      { required: true, pattern: /1\d{10}/, message: '请输入正确的手机号格式', trigger: 'blur' }
+      { required: true, pattern: /1\d{10}/, message: '请输入正确的手机号', trigger: 'blur' }
     ],
     roleList: [{ required: true, message: '请选择用户系统角色', trigger: 'blur' }],
     deptId: [{ required: true, message: '请选择所属部门', trigger: 'blur' }]
@@ -72,7 +72,6 @@
   // 用户提交
   const handleSubmit = () => {
     dialogForm.value?.validate(async (valid) => {
-      console.log(valid)
       if (valid) {
         // 如果row不存在，即是新建，要把之前遗留的id删除掉，后端是根据是否有id进行判断是新增还是编辑
         if (!dialogData.value.row) {

@@ -34,7 +34,7 @@
             </template>
             <!--el-menu-item子菜单  -->
             <el-menu-item index="/user">用户管理 </el-menu-item>
-            <el-menu-item index="1-2"> 菜单管理 </el-menu-item>
+            <el-menu-item index="/menu"> 菜单管理 </el-menu-item>
           </el-sub-menu>
           <el-sub-menu index="2">
             <template #title>

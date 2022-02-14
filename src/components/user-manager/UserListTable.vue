@@ -166,6 +166,7 @@
       layout="prev, pager, next"
       :total="pager.total"
       :page-size="pager.pageSize"
+      hide-on-single-page
       @current-change="handleCurrentChange"
     >
     </el-pagination>
