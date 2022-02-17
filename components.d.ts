@@ -30,6 +30,8 @@ declare module 'vue' {
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     Form: typeof import('./src/components/public/table-frame/Form.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    MenuDialog: typeof import('./src/components/menu/MenuDialog.vue')['default']
+    QueryForm: typeof import('./src/components/user-manager/QueryForm.vue')['default']
     Table: typeof import('./src/components/public/table-frame/Table.vue')['default']
     UserDialog: typeof import('./src/components/user-manager/UserDialog.vue')['default']
     UserInfo: typeof import('./src/components/home/UserInfo.vue')['default']
@@ -37,4 +39,4 @@ declare module 'vue' {
   }
 }
 
-export {}
+export { }

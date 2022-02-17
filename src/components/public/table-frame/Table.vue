@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { reactive, toRefs } from 'vue'
   import type { PageType } from '@/types/common'
-  import { TableConfig } from '../../../types/table-frame'
+  import { TableConfig } from '@/types/table-frame'
 
   // 选择中用户列表的对象
   // const checkedUserIds = ref<string[]>([])
