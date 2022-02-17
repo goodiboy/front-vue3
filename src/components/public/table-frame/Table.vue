@@ -16,15 +16,19 @@
     tableConfig: TableConfig
     dataList: unknown
   }>()
-  // const emit = defineEmits<{}>()
+  const emit = defineEmits<{
+    (e: 'selectionChange', list: string[]): void
+  }>()
 
   const { dataList, tableConfig } = toRefs(props)
 
-  const handleCurrentChange = (page: number) => {
-    console.log(page)
+  const handleSelectionChange = (list: { _id: string }[]) => {
+    const ids = list.map((item) => item._id)
+    emit('selectionChange', ids)
   }
-  const handleSelectionChange = (list: unknown[]) => {
-    console.log(list)
+
+  const handleCurrentChange = (page: number) => {
+    pager.pageNum = page
   }
 </script>
 <template>

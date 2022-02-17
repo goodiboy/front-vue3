@@ -11,6 +11,7 @@ export interface TableConfig {
     handle: (a: any, b?: any) => void
   }[]
   columns: {
+    type?: string
     label: string
     prop?: string
     width?: number | string
