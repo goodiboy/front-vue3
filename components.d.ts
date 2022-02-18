@@ -4,8 +4,6 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Captcha: typeof import('./src/components/public/captcha/Captcha.vue')['default']
-    Dialog: typeof import('./src/components/public/table-frame/Dialog.vue')['default']
     ElBadge: typeof import('element-plus/es')['ElBadge']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCascader: typeof import('element-plus/es')['ElCascader']
@@ -28,14 +26,6 @@ declare module 'vue' {
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
-    Form: typeof import('./src/components/public/table-frame/Form.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    MenuDialog: typeof import('./src/components/menu/MenuDialog.vue')['default']
-    QueryForm: typeof import('./src/components/user-manager/QueryForm.vue')['default']
-    Table: typeof import('./src/components/public/table-frame/Table.vue')['default']
-    UserDialog: typeof import('./src/components/user-manager/UserDialog.vue')['default']
-    UserInfo: typeof import('./src/components/home/UserInfo.vue')['default']
-    UserListTable: typeof import('./src/components/user-manager/UserListTable.vue')['default']
   }
 }
 

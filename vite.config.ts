@@ -12,6 +12,12 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()]
     }),
     Components({
+      /**
+       * 要搜索组件的目录的相对路径。
+       * 默认是'src/components', 设置为空是不自动引入自己编写的组件，那样不方便点击command+点击跳转，且不能重名
+       * 我只想使用自动导入ElementPlus的组件
+       */
+      dirs: '',
       resolvers: [ElementPlusResolver()]
     })
   ],
