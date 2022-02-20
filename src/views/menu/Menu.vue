@@ -5,7 +5,7 @@
   import QueryForm from '@/components/public/table-frame/Form.vue'
   import ListTable from '@/components/public/table-frame/Table.vue'
   import dayjs from 'dayjs'
-  import { FormConfig, TableConfig } from '@/types/table-frame'
+  import { FormConfig, TableConfig } from '@/components/public/table-frame/types'
 
   const queryFormData = reactive({
     menuState: 1

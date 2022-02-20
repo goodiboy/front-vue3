@@ -4,7 +4,7 @@
   // 初始化用表单对象
   import { ref, toRefs } from 'vue'
   import { ElForm } from 'element-plus'
-  import { FormConfig } from '@/types/table-frame'
+  import { FormConfig } from '@/components/public/table-frame/types'
 
   // const props = toRefs(defineProps<{ modelValue: UserQueryForm }>()) // defineProps编译宏无法传入toRefs函数内部，报错defineProps is not defined
   const props = defineProps<{ modelValue: unknown; formConfig: FormConfig[] }>()
