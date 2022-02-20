@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import UserInfo from '@/components/home/UserInfo.vue'
   import { Setting, Fold } from '@element-plus/icons'
   import { ref } from 'vue'
 

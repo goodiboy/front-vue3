@@ -9,7 +9,7 @@ import { Role, UserListParams } from '@/types/userInfo'
 export const getUserList = (params: UserListParams) => {
   return AxiosInstance.get<ListData<UserInfo>>('/users/list', {
     params,
-    mock: true
+    mock: false
   })
 }
 
