@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { onMounted, reactive, ref } from 'vue'
-  import { getMenuList } from '@/api/menu'
+  import { deleteMenu, getMenuList, operateMenu } from '@/api/menu'
   import MenuDialog from '@/components/menu/MenuDialog.vue'
   import QueryForm from '@/components/public/table-frame/Form.vue'
   import ListTable from '@/components/public/table-frame/Table.vue'
@@ -16,18 +16,19 @@
     show: false
   })
 
-  const getMenus = async () => {
-    const res = await getMenuList()
-    menuList.value = res.data
-    console.log(res)
-  }
-
   onMounted(() => {
     getMenus()
   })
 
-  const handleSubmit = () => {
-    handleQuery()
+  const getMenus = async () => {
+    const res = await getMenuList(queryFormData)
+    menuList.value = res.data
+    console.log(res)
+  }
+
+  const handleSubmit = async (formData: any) => {
+    await operateMenu(formData)
+    getMenus()
     dialogData.show = false
   }
 
@@ -43,11 +44,14 @@
     console.log('handleEdit')
     // todo
   }
-  const handleDel = (row: any) => {
-    console.log(row)
+  const handleDel = async (row: any) => {
+    await deleteMenu(row._id)
+    getMenus()
   }
 
   const handleQuery = () => {
+    console.log(queryFormData)
+    getMenus()
     // todo
   }
 
@@ -131,7 +135,7 @@
       },
       {
         label: '创建时间',
-        prop: 'createTime',
+        prop: 'created',
         formatter(row: any, column: number, value: string): string {
           return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
         }

@@ -2,8 +2,28 @@ import AxiosInstance from '@/utils/axios'
 /**
  * 获取菜单列表
  */
-export const getMenuList = () => {
+export const getMenuList = (params?: any) => {
   return AxiosInstance.get('/menu/list', {
-    mock: true
+    params,
+    mock: false
+  })
+}
+
+/**
+ * 获取添加删除菜单
+ */
+export const operateMenu = (params: any) => {
+  return AxiosInstance.post('/menu/operate', params)
+}
+
+/**
+ * 删除菜单
+ * @param _id 菜单的id
+ */
+export const deleteMenu = (_id: string) => {
+  return AxiosInstance.delete('/menu/delete', {
+    params: {
+      _id
+    }
   })
 }

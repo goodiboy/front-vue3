@@ -24,7 +24,7 @@
   const props = defineProps<{ dialogData: { show: boolean; row?: any }; menuList: any[] }>()
   const emit = defineEmits<{
     (e: 'close'): void
-    (e: 'submit'): void
+    (e: 'submit', formData: any): void
   }>()
 
   const { dialogData, menuList } = toRefs(props)
@@ -54,7 +54,7 @@
   const handleSubmit = () => {
     dialogForm.value?.validate(async (valid) => {
       if (valid) {
-        emit('submit')
+        emit('submit', menuForm)
       } else {
         ElMessage.error('表单填写错误')
       }
