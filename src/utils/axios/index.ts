@@ -64,13 +64,17 @@ AxiosInstance.interceptors.request.use(
 
 AxiosInstance.interceptors.response.use(
   (response) => {
+    const showDialog = !response.config.disableMsg && response.data.msg
     if (response.data.code === 200) {
       if (response.config.cacheApi) {
         store.commit('cacheApiModule/sava', { api: response.config.url, data: response })
       }
+      if (showDialog) {
+        ElMessage.success(response.data.msg)
+      }
       return Promise.resolve(response.data)
     } else {
-      if (!response.config.disableMsg) {
+      if (showDialog) {
         ElMessage.error(response.data.msg)
       }
       return Promise.reject(response)

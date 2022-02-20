@@ -15,8 +15,7 @@
       throw Error('没有拿到验证码信息')
     }
     await validate()
-    const res = await forget(toRaw(formData))
-    ElMessage.success(res.msg)
+    forget(toRaw(formData))
   }
 
   // 跳转登录页面
