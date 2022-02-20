@@ -35,7 +35,8 @@ export interface UserInfo {
   password: string
   nickname: string
   created: string
-  update: string
+  updated: string
+  lastLogin: string
   mobile: string
   sex: Sex
   deptId: string[]

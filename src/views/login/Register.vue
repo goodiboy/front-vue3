@@ -24,7 +24,6 @@
     }
     await validate()
     const res = await register(toRaw(formData))
-    ElMessage.success('注册成功')
     storage.setItem('userInfo', res.data, 86400) // 一天 = 60 * 60 * 24 = 86400
     router.replace({ name: 'Home' })
   }
