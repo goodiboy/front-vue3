@@ -33,7 +33,16 @@
   }
 
   const handleAdd = (row?: any) => {
-    dialogData.row = { parentId: row._id, parentIds: row.parentIds }
+    let parentId: null | string[] = null
+    if (row) {
+      parentId = []
+      if (row.parentId) {
+        parentId.push(...row.parentId)
+      }
+      parentId.push(row._id)
+      console.log(parentId)
+    }
+    dialogData.row = { parentId }
     dialogData.show = true
   }
   const handleEdit = (row?: any) => {

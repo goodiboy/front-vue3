@@ -38,7 +38,7 @@
         v-for="(item, index) of tableConfig.action"
         :key="index"
         :type="item.type"
-        @click="item.handle"
+        @click="item.handle(undefined)"
       >
         {{ item.label }}
       </el-button>

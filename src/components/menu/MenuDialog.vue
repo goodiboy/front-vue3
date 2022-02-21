@@ -32,7 +32,7 @@
   const dialogForm = ref<InstanceType<typeof ElForm>>()
   // 新增用户对象
   const menuForm = reactive({
-    parentId: [null],
+    parentId: null,
     menuType: 1,
     menuState: 1
   })
