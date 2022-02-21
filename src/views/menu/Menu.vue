@@ -32,17 +32,13 @@
     dialogData.show = false
   }
 
-  const handleAdd = (a?: any) => {
-    dialogData.row = { parentId: a.parentId }
+  const handleAdd = (row?: any) => {
+    dialogData.row = { parentId: row._id, parentIds: row.parentIds }
     dialogData.show = true
-    console.log('handleAdd')
-    // todo
   }
-  const handleEdit = (a?: any) => {
-    dialogData.row = a
+  const handleEdit = (row?: any) => {
+    dialogData.row = row
     dialogData.show = true
-    console.log('handleEdit')
-    // todo
   }
   const handleDel = async (row: any) => {
     await deleteMenu(row._id)
