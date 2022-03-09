@@ -20,6 +20,21 @@
     ]
   })
 
+  const permissionOption = [
+    {
+      label: '新增',
+      value: 'create'
+    },
+    {
+      label: '删除',
+      value: 'delete'
+    },
+    {
+      label: '查看',
+      value: 'check'
+    }
+  ]
+
   // 如果row存在即时编辑状态，不存在就是新增状态
   const props = defineProps<{ dialogData: { show: boolean; row?: any }; menuList: any[] }>()
   const emit = defineEmits<{
@@ -80,24 +95,35 @@
           <el-radio :label="2">按钮</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="菜单名称" prop="menuName">
-        <el-input v-model="menuForm.menuName" placeholder="请输入菜单名称" />
-      </el-form-item>
-      <el-form-item v-show="menuForm.menuType === 1" label="菜单图标" prop="icon">
-        <el-input v-model="menuForm.icon" placeholder="请输入岗位" />
-      </el-form-item>
-      <el-form-item v-show="menuForm.menuType === 1" label="路由地址" prop="path">
-        <el-input v-model="menuForm.path" placeholder="请输入路由地址" />
-      </el-form-item>
-      <el-form-item v-show="menuForm.menuType === 2" label="权限标识" prop="menuCode">
-        <el-input v-model="menuForm.menuCode" placeholder="请输入权限标识" />
-      </el-form-item>
-      <el-form-item v-show="menuForm.menuType === 1" label="组件路径" prop="component">
-        <el-input v-model="menuForm.component" placeholder="请输入组件路径" />
-      </el-form-item>
-      <el-form-item v-show="menuForm.menuType === 1" label="菜单状态" prop="menuState">
+      <template v-if="menuForm.menuType === 1">
+        <el-form-item label="菜单名称" prop="menuName">
+          <el-input v-model="menuForm.menuName" placeholder="请输入菜单名称" />
+        </el-form-item>
+        <el-form-item label="菜单图标" prop="icon">
+          <el-input v-model="menuForm.icon" placeholder="请输入岗位" />
+        </el-form-item>
+        <el-form-item label="路由地址" prop="path">
+          <el-input v-model="menuForm.path" placeholder="请输入路由地址" />
+        </el-form-item>
+        <el-form-item label="组件路径" prop="component">
+          <el-input v-model="menuForm.component" placeholder="请输入组件路径" />
+        </el-form-item>
+      </template>
+      <template v-else>
+        <el-form-item label="权限标识" prop="menuCode">
+          <el-select v-model="menuForm.permission" placeholder="请选择权限">
+            <el-option
+              v-for="op of permissionOption"
+              :key="op.value"
+              :value="op.value"
+              :label="op.label"
+            />
+          </el-select>
+        </el-form-item>
+      </template>
+      <el-form-item label="状态" prop="menuState">
         <el-radio-group v-model="menuForm.menuState">
-          <el-radio :label="1">正常</el-radio>
+          <el-radio :label="1">启用</el-radio>
           <el-radio :label="2">停用</el-radio>
         </el-radio-group>
       </el-form-item>
