@@ -6,14 +6,16 @@
   import ListTable from '@/components/public/table-frame/Table.vue'
   import dayjs from 'dayjs'
   import { FormConfig, TableConfig } from '@/components/public/table-frame/types'
+  import { DialogTypeEnum } from '@/types/menu'
 
   const queryFormData = reactive({
     menuState: 1
   })
   const menuList = ref([])
 
-  const dialogData = reactive<{ show: boolean; row?: any }>({
-    show: false
+  const dialogData = reactive<{ show: boolean; type: DialogTypeEnum; row?: any }>({
+    show: false,
+    type: DialogTypeEnum.CREATE
   })
 
   onMounted(() => {
@@ -27,6 +29,9 @@
   }
 
   const handleSubmit = async (formData: any) => {
+    if (dialogData.type === DialogTypeEnum.CREATE) {
+      delete formData._id
+    }
     await operateMenu(formData)
     getMenus()
     dialogData.show = false
@@ -43,10 +48,12 @@
       console.log(parentId)
     }
     dialogData.row = { parentId }
+    dialogData.type = DialogTypeEnum.CREATE
     dialogData.show = true
   }
   const handleEdit = (row?: any) => {
     dialogData.row = row
+    dialogData.type = DialogTypeEnum.EDIT
     dialogData.show = true
   }
   const handleDel = async (row: any) => {

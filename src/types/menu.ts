@@ -39,3 +39,8 @@
 //   children: Children[]
 //   __v?: number
 // }
+
+export enum DialogTypeEnum {
+  'CREATE',
+  'EDIT'
+}
