@@ -6,7 +6,8 @@
   import ListTable from '@/components/public/table-frame/Table.vue'
   import dayjs from 'dayjs'
   import { FormConfig, TableConfig } from '@/components/public/table-frame/types'
-  import { DialogTypeEnum, MenuState, MenuType } from '@/types/menu'
+  import { MenuState, MenuType } from '@/types/menu'
+  import { DialogTypeEnum } from '@/types/common'
 
   const queryFormData = reactive({
     menuState: MenuState.ENABLE

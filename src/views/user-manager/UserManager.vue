@@ -4,7 +4,7 @@
   import UserDialog from '@/components/user-manager/UserDialog.vue'
   import { reactive, ref } from 'vue'
   import type { UserInfo, UserQueryForm } from '@/types/userinfo'
-  import { DialogTypeEnum } from '@/types/menu'
+  import { DialogTypeEnum } from '@/types/common'
 
   const userTable = ref<{ getListData: () => void }>()
 

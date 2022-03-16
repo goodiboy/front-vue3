@@ -2,7 +2,8 @@
   // 弹窗显示对象
   import { computed, nextTick, reactive, ref, toRefs, watch } from 'vue'
   import { ElForm } from 'element-plus'
-  import { DialogTypeEnum, MenuType } from '@/types/menu'
+  import { MenuType } from '@/types/menu'
+  import { DialogTypeEnum } from '@/types/common'
 
   // 定义表单验证规则
   const rules = reactive({

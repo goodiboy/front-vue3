@@ -4,7 +4,7 @@
   import type { Role, UserInfo } from '@/types/userinfo'
   import { ElForm } from 'element-plus'
   import { getDeptList, getSystemRoleList, operateUser } from '@/api/users'
-  import { DialogTypeEnum } from '@/types/menu'
+  import { DialogTypeEnum } from '@/types/common'
 
   // 定义表单验证规则
   const rules = reactive({
