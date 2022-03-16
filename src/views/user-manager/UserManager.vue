@@ -3,8 +3,8 @@
   import UserListTable from '@/components/user-manager/UserListTable.vue'
   import UserDialog from '@/components/user-manager/UserDialog.vue'
   import { reactive, ref } from 'vue'
-  import type { UserQueryForm } from '@/types/userinfo'
-  import type { UserInfo } from '@/types/userinfo'
+  import type { UserInfo, UserQueryForm } from '@/types/userinfo'
+  import { DialogTypeEnum } from '@/types/menu'
 
   const userTable = ref<{ getListData: () => void }>()
 
@@ -12,8 +12,9 @@
     state: 1
   })
 
-  const dialogData = reactive<{ show: boolean; row?: UserInfo }>({
-    show: false
+  const dialogData = reactive<{ show: boolean; row?: UserInfo; type: DialogTypeEnum }>({
+    show: false,
+    type: DialogTypeEnum.CREATE
   })
 
   const handleQuery = () => {
@@ -21,6 +22,11 @@
   }
 
   const handleOpenDialog = (row?: UserInfo) => {
+    if (row) {
+      dialogData.type = DialogTypeEnum.EDIT
+    } else {
+      dialogData.type = DialogTypeEnum.CREATE
+    }
     dialogData.show = true
     dialogData.row = row
   }

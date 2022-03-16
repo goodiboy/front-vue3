@@ -1,9 +1,10 @@
 <script setup lang="ts">
   // 弹窗显示对象
-  import { nextTick, reactive, ref, toRefs, watch } from 'vue'
+  import { computed, nextTick, reactive, ref, toRefs, watch } from 'vue'
   import type { Role, UserInfo } from '@/types/userinfo'
   import { ElForm } from 'element-plus'
   import { getDeptList, getSystemRoleList, operateUser } from '@/api/users'
+  import { DialogTypeEnum } from '@/types/menu'
 
   // 定义表单验证规则
   const rules = reactive({
@@ -17,7 +18,8 @@
   })
 
   // 如果row存在即时编辑状态，不存在就是新增状态
-  const props = defineProps<{ dialogData: { show: boolean; row?: UserInfo } }>()
+  const props =
+    defineProps<{ dialogData: { show: boolean; row?: UserInfo; type: DialogTypeEnum } }>()
   const emit = defineEmits<{
     (e: 'close'): void
     (e: 'submit'): void
@@ -35,6 +37,10 @@
   const roleList = ref<Role[]>([])
   // 部门列表
   const deptList = ref()
+
+  const dialogTitle = computed(() =>
+    dialogData.value.type === DialogTypeEnum.EDIT ? '编辑用户' : '新增用户'
+  )
 
   const getSystemRoles = async () => {
     const res = await getSystemRoleList()
@@ -87,7 +93,7 @@
 </script>
 <template>
   <!-- 增加用户弹窗 -->
-  <el-dialog v-model="dialogData.show" title="新增用户" @close="dialogForm?.resetFields()">
+  <el-dialog v-model="dialogData.show" :title="dialogTitle" @close="dialogForm?.resetFields()">
     <el-form ref="dialogForm" :model="userForm" label-width="100px" :rules="rules">
       <el-form-item label="用户名" prop="username">
         <el-input

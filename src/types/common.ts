@@ -22,3 +22,9 @@ export interface CaptchaType {
   captcha: SVGElement
   captchaText: string
 }
+
+// 弹窗类型
+export enum DialogTypeEnum {
+  'CREATE', // 添加
+  'EDIT' // 编辑
+}

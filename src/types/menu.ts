@@ -16,9 +16,3 @@ export enum MenuState {
   'ENABLE' = 1, // 启用
   'DISABLE' = 2 // 禁用
 }
-
-// 弹窗类型
-export enum DialogTypeEnum {
-  'CREATE', // 添加
-  'EDIT' // 编辑
-}
