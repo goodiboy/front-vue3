@@ -1,9 +1,42 @@
 <script setup lang="ts">
   import UserInfo from '@/components/home/UserInfo.vue'
   import { Setting, Fold } from '@element-plus/icons'
-  import { ref } from 'vue'
+  import { onMounted, ref } from 'vue'
+  import { getMenuList } from '@/api/menu'
+  // import router from '@/router'
+  import { MenuType } from '@/types/menu'
+  import TreeMenu from '@/components/public/tree-menu/TreeMenu.vue'
 
   const isCollapse = ref(false)
+  const menuList = ref<MenuType[]>([])
+  onMounted(() => {
+    getMenus()
+  })
+
+  const addRoute = () => {
+    const rec = (list: any[]) => {
+      list.forEach((item: any) => {
+        if (item.children.length) {
+          rec(item.children)
+        }
+        // if (item.path && item.path !== '--' && item.component !== '--') {
+        //   router.addRoute('Home', {
+        //     name: item.menuName,
+        //     path: item.path,
+        //     component: () => import(/* @vite-ignore */ item.component)
+        //   })
+        // }
+      })
+    }
+    rec(menuList.value)
+  }
+
+  const getMenus = async () => {
+    const res = await getMenuList()
+    // menuList.value = res.data
+    console.log(res)
+    addRoute()
+  }
 
   const toggleSideMenu = () => {
     isCollapse.value = !isCollapse.value
@@ -27,6 +60,8 @@
           :collapse="isCollapse"
           class="nav-menu"
         >
+          <tree-menu :menu-list="menuList" />
+
           <!--el-submenu父菜单  -->
           <el-sub-menu index="1">
             <template #title>

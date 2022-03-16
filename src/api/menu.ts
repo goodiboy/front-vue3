@@ -1,9 +1,10 @@
 import AxiosInstance from '@/utils/axios'
+import { MenuType } from '@/types/menu'
 /**
  * 获取菜单列表
  */
 export const getMenuList = (params?: any) => {
-  return AxiosInstance.get('/menu/list', {
+  return AxiosInstance.get<MenuType[]>('/menu/list', {
     params,
     mock: false
   })

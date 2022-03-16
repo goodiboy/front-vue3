@@ -1,46 +1,24 @@
-// interface Children {
-//   parentId: string[]
-//   updateTime: string
-//   createTime: string
-//   _id: string
-//   menuType: string
-//   menuState: string
-//   menuName: string
-//   path: string
-//   component: string
-//   children: Children1[]
-//   action: Children1[]
-// }
-//
-// interface Children1 {
-//   parentId: string[]
-//   updateTime: string
-//   createTime: string
-//   _id: string
-//   menuType: string
-//   menuState: string
-//   menuName: string
-//   menuCode: string
-// }
-//
-// interface MenuType {
-//   parentId: string[]
-//   updateTime: string
-//   createTime: string
-//   _id: string
-//   menuType: string
-//   menuName: string
-//   menuCode?: string
-//   path: string
-//   icon: string
-//   order?: string
-//   component?: string
-//   menuState: string
-//   children: Children[]
-//   __v?: number
-// }
+export interface MenuType {
+  _id?: string // id // 添加的时候没有id
+  menuName: string //菜单名称
+  menuCode: string //权限标识
+  path: string //路由地址
+  icon: string //图标
+  component: string //组件地址
+  menuState: MenuState //菜单状态
+  parentId: string[] | null
+  created: string //创建时间
+  updated: string //更新时间
+  children?: MenuType[]
+}
 
+export enum MenuState {
+  'ENABLE' = 1, // 启用
+  'DISABLE' = 2 // 禁用
+}
+
+// 弹窗类型
 export enum DialogTypeEnum {
-  'CREATE',
-  'EDIT'
+  'CREATE', // 添加
+  'EDIT' // 编辑
 }

@@ -6,14 +6,14 @@
   import ListTable from '@/components/public/table-frame/Table.vue'
   import dayjs from 'dayjs'
   import { FormConfig, TableConfig } from '@/components/public/table-frame/types'
-  import { DialogTypeEnum } from '@/types/menu'
+  import { DialogTypeEnum, MenuState, MenuType } from '@/types/menu'
 
   const queryFormData = reactive({
-    menuState: 1
+    menuState: MenuState.ENABLE
   })
-  const menuList = ref([])
+  const menuList = ref<MenuType[]>([])
 
-  const dialogData = reactive<{ show: boolean; type: DialogTypeEnum; row?: any }>({
+  const dialogData = reactive<{ show: boolean; type: DialogTypeEnum; row?: MenuType }>({
     show: false,
     type: DialogTypeEnum.CREATE
   })
@@ -28,7 +28,7 @@
     console.log(res)
   }
 
-  const handleSubmit = async (formData: any) => {
+  const handleSubmit = async (formData: MenuType) => {
     if (dialogData.type === DialogTypeEnum.CREATE) {
       delete formData._id
     }
@@ -37,34 +37,34 @@
     dialogData.show = false
   }
 
-  const handleAdd = (row?: any) => {
+  const handleAdd = (row?: MenuType) => {
     let parentId: null | string[] = null
     if (row) {
       parentId = []
       if (row.parentId) {
         parentId.push(...row.parentId)
       }
-      parentId.push(row._id)
-      console.log(parentId)
+      if (row._id) {
+        parentId.push(row._id)
+      }
     }
-    dialogData.row = { parentId }
+    dialogData.row = { parentId } as MenuType
     dialogData.type = DialogTypeEnum.CREATE
     dialogData.show = true
   }
-  const handleEdit = (row?: any) => {
+  const handleEdit = (row?: MenuType) => {
     dialogData.row = row
     dialogData.type = DialogTypeEnum.EDIT
     dialogData.show = true
   }
-  const handleDel = async (row: any) => {
+  const handleDel = async (row: MenuType) => {
+    if (!row._id) return
     await deleteMenu(row._id)
     getMenus()
   }
 
   const handleQuery = () => {
-    console.log(queryFormData)
     getMenus()
-    // todo
   }
 
   // 查询表单配置
@@ -79,8 +79,8 @@
       label: '菜单状态',
       prop: 'menuState',
       option: [
-        { value: 1, label: '正常' },
-        { value: 2, label: '停用' }
+        { value: 1, label: '启用' },
+        { value: 2, label: '禁用' }
       ]
     }
   ]
@@ -109,18 +109,6 @@
         prop: 'icon'
       },
       {
-        label: '菜单类型',
-        prop: 'menuType',
-        formatter(row: any, column: any, value: any) {
-          return (
-            {
-              1: '菜单',
-              2: '按钮'
-            } as any
-          )[value]
-        }
-      },
-      {
         label: '权限标识',
         prop: 'menuCode'
       },
@@ -136,11 +124,11 @@
         label: '菜单状态',
         prop: 'menuState',
         width: 90,
-        formatter(row: any, column: any, value: any) {
+        formatter(row: MenuType, column: number, value: number) {
           return (
             {
-              1: '正常',
-              2: '停用'
+              1: '启用',
+              2: '禁用'
             } as any
           )[value]
         }
@@ -148,7 +136,7 @@
       {
         label: '创建时间',
         prop: 'created',
-        formatter(row: any, column: number, value: string): string {
+        formatter(row: MenuType, column: number, value: string): string {
           return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
         }
       },

@@ -1,7 +1,8 @@
 <script setup lang="ts">
   // 弹窗显示对象
-  import { nextTick, reactive, ref, toRefs, watch } from 'vue'
+  import { computed, nextTick, reactive, ref, toRefs, watch } from 'vue'
   import { ElForm } from 'element-plus'
+  import { DialogTypeEnum, MenuType } from '@/types/menu'
 
   // 定义表单验证规则
   const rules = reactive({
@@ -20,23 +21,11 @@
     ]
   })
 
-  const permissionOption = [
-    {
-      label: '新增',
-      value: 'create'
-    },
-    {
-      label: '删除',
-      value: 'delete'
-    },
-    {
-      label: '查看',
-      value: 'check'
-    }
-  ]
-
   // 如果row存在即时编辑状态，不存在就是新增状态
-  const props = defineProps<{ dialogData: { show: boolean; row?: any }; menuList: any[] }>()
+  const props = defineProps<{
+    dialogData: { show: boolean; row?: MenuType; type: DialogTypeEnum }
+    menuList: MenuType[]
+  }>()
   const emit = defineEmits<{
     (e: 'close'): void
     (e: 'submit', formData: any): void
@@ -48,9 +37,12 @@
   // 新增用户对象
   const menuForm = reactive({
     parentId: null,
-    menuType: 1,
     menuState: 1
   })
+
+  const dialogTitle = computed(() =>
+    dialogData.value.type === DialogTypeEnum.EDIT ? '编辑菜单' : '新增菜单'
+  )
 
   watch(dialogData.value, () => {
     if (dialogData.value.show && dialogData.value.row) {
@@ -78,7 +70,7 @@
 </script>
 <template>
   <!-- 增加用户弹窗 -->
-  <el-dialog v-model="dialogData.show" title="用户新增" @close="dialogForm?.resetFields()">
+  <el-dialog v-model="dialogData.show" :title="dialogTitle" @close="dialogForm?.resetFields()">
     <el-form ref="dialogForm" :model="menuForm" label-width="100px" :rules="rules">
       <el-form-item label="父级菜单" prop="parentId">
         <el-cascader
@@ -89,38 +81,18 @@
         />
         <span style="margin-left: 10px; color: #f56c6c">不选，则直接创建一级菜单</span>
       </el-form-item>
-      <el-form-item label="菜单类型" prop="menuType">
-        <el-radio-group v-model="menuForm.menuType">
-          <el-radio :label="1">菜单</el-radio>
-          <el-radio :label="2">按钮</el-radio>
-        </el-radio-group>
+      <el-form-item label="菜单名称" prop="menuName">
+        <el-input v-model="menuForm.menuName" placeholder="请输入菜单名称" />
       </el-form-item>
-      <template v-if="menuForm.menuType === 1">
-        <el-form-item label="菜单名称" prop="menuName">
-          <el-input v-model="menuForm.menuName" placeholder="请输入菜单名称" />
-        </el-form-item>
-        <el-form-item label="菜单图标" prop="icon">
-          <el-input v-model="menuForm.icon" placeholder="请输入岗位" />
-        </el-form-item>
-        <el-form-item label="路由地址" prop="path">
-          <el-input v-model="menuForm.path" placeholder="请输入路由地址" />
-        </el-form-item>
-        <el-form-item label="组件路径" prop="component">
-          <el-input v-model="menuForm.component" placeholder="请输入组件路径" />
-        </el-form-item>
-      </template>
-      <template v-else>
-        <el-form-item label="权限标识" prop="menuCode">
-          <el-select v-model="menuForm.permission" placeholder="请选择权限">
-            <el-option
-              v-for="op of permissionOption"
-              :key="op.value"
-              :value="op.value"
-              :label="op.label"
-            />
-          </el-select>
-        </el-form-item>
-      </template>
+      <el-form-item label="菜单图标" prop="icon">
+        <el-input v-model="menuForm.icon" placeholder="请输入岗位" />
+      </el-form-item>
+      <el-form-item label="路由地址" prop="path">
+        <el-input v-model="menuForm.path" placeholder="请输入路由地址" />
+      </el-form-item>
+      <el-form-item label="组件路径" prop="component">
+        <el-input v-model="menuForm.component" placeholder="请输入组件路径" />
+      </el-form-item>
       <el-form-item label="状态" prop="menuState">
         <el-radio-group v-model="menuForm.menuState">
           <el-radio :label="1">启用</el-radio>
